@@ -1,0 +1,53 @@
+name: giter8
+
+on:
+  push:
+    branches: [master, dev]
+
+  schedule:
+    - cron: "30 18 * * *" # run at 00:00 AM IST
+
+jobs:
+  g8:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout esw repo
+        uses: actions/checkout@v2
+        with:
+          repository: tmtsoftware/esw
+
+      - uses: olafurpg/setup-scala@v5
+        with:
+          java-version: adopt@1.11
+
+      - name: Cache ~/.cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache
+          key: ${{ runner.os }}-coursier-${{ hashFiles('project/Libs.scala') }}
+          restore-keys: |
+            ${{ runner.os }}-coursier-
+      - name: Cache ~/.sbt
+        uses: actions/cache@v1
+        with:
+          path: ~/.sbt
+          key: ${{ runner.os }}-sbt-${{ hashFiles('project/build.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-sbt-
+      - name: Publish Local
+        run: sbt clean publishLocal
+
+      - name: Giter8 Compile
+        run: |
+          sbt new tmtsoftware/esw.g8 --branch dev --name=galil --esw_version='0.1.0-SNAPSHOT' 
+          cd galil 
+          sbt clean test
+      - name: Notify slack
+        if: always()
+        continue-on-error: true
+        uses: kpritam/slack-job-status-action@v1
+        with:
+          job-status: ${{ job.status }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: ci-nightly
