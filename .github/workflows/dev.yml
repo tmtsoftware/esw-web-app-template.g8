@@ -21,6 +21,19 @@ jobs:
         with:
           java-version: adopt@1.11
 
+      - name: Install CS native
+        run: |
+          curl -fLo cs https://git.io/coursier-cli-linux
+          chmod +x cs
+          sudo mv cs /usr/local/bin
+
+      - name: Install giter8
+        run: |
+          cs install giter8
+          sudo mv /home/runner/.local/share/coursier/bin/g8 /usr/local/bin
+          cd /usr/local/bin
+          chmod +x g8
+
       - name: Cache ~/.cache
         uses: actions/cache@v1
         with:
@@ -28,6 +41,7 @@ jobs:
           key: ${{ runner.os }}-coursier-${{ hashFiles('project/Libs.scala') }}
           restore-keys: |
             ${{ runner.os }}-coursier-
+
       - name: Cache ~/.sbt
         uses: actions/cache@v1
         with:
@@ -35,14 +49,16 @@ jobs:
           key: ${{ runner.os }}-sbt-${{ hashFiles('project/build.properties') }}
           restore-keys: |
             ${{ runner.os }}-sbt-
+
       - name: Publish Local
         run: sbt clean publishLocal
 
       - name: Giter8 Compile
         run: |
-          sbt new tmtsoftware/esw.g8 --branch dev --name=galil --esw_version='0.1.0-SNAPSHOT' 
+          g8 tmtsoftware/esw.g8 --name=galil
           cd galil 
           sbt clean test
+
       - name: Notify slack
         if: always()
         continue-on-error: true
