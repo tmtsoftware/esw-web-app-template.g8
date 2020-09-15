@@ -55,8 +55,8 @@ jobs:
 
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw.g8 --name=galil
-          cd galil 
+          g8 tmtsoftware/esw.g8 --name=galil --esw_version='0.1.0-SNAPSHOT'
+          cd galil
           sbt clean test
 
       - name: Notify slack
