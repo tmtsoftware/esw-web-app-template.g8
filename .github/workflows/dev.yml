@@ -1,4 +1,4 @@
-name: giter8
+name: Dev ci for master
 
 on:
   push:
@@ -50,13 +50,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-
 
-      - name: Publish Local
+      - name: Publish Local checked out esw repo
         run: sbt clean publishLocal
 
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 --name=galil --esw_version='0.1.0-SNAPSHOT'
-          cd galil
+          g8 tmtsoftware/esw-backend-template.g8 --name=http-server --esw_version='0.1.0-SNAPSHOT'
+          cd http-server
           sbt clean test
 
       - name: Notify slack
