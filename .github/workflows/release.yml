@@ -1,22 +1,15 @@
-name: giter8
+name: release sanity
 
 on:
   push:
-    branches: [master]
-
-  schedule:
-    - cron: "30 18 * * *" # run at 00:00 AM IST
+    tags:
+      - "v*"
 
 jobs:
   g8:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout esw repo
-        uses: actions/checkout@v2
-        with:
-          repository: tmtsoftware/esw
-
       - uses: olafurpg/setup-scala@v5
         with:
           java-version: adopt@1.11
@@ -50,12 +43,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-
 
-      - name: Publish Local
-        run: sbt clean publishLocal
-
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 --name=galil --esw_version='0.1.0-SNAPSHOT'
+          g8 tmtsoftware/esw-backend-template.g8 -t <****> --name=galil
           cd galil
           sbt clean test
 

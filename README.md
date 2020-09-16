@@ -9,6 +9,18 @@ The created project contains a sample backend application which includes the fol
 * A case app for starting server with `start` command (SampleApp.scala)
 * Unit tests, integration tests for the backend server.
 
+## Getting Started
+
+### Install Coursier
+Please follow the [coursier installation](https://get-coursier.io/docs/cli-installation)
+
+### Install Giter8
+
+`cs install giter8`
+
+### Create new project using giter8 template
+
+`g8 tmtsoftware/esw-backend-template.g8`
 
 This template will prompt for the following parameters. Press Enter to accept the default values, shown in brackets:
 
