@@ -45,8 +45,8 @@ jobs:
 
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 -t <****> --name=galil
-          cd galil
+          g8 tmtsoftware/esw-backend-template.g8 -t <****> --name=http-server
+          cd http-server
           sbt clean test
 
       - name: Notify slack
