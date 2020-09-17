@@ -55,8 +55,8 @@ jobs:
 
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 --name=http-server --esw_version='0.1.0-SNAPSHOT'
-          cd http-server
+          g8 tmtsoftware/esw-backend-template.g8 --name=server --esw_version='0.1.0-SNAPSHOT'
+          cd server
           sbt clean test
 
       - name: Notify slack
