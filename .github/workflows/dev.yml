@@ -1,6 +1,8 @@
 name: Dev ci for master
 
 on:
+  pull_request:
+    branches: [master]
   push:
     branches: [master]
 
