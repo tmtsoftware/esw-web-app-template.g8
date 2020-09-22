@@ -57,7 +57,7 @@ jobs:
 
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --esw_version='0.1.0-SNAPSHOT'
+          g8 tmtsoftware/esw-backend-template.g8 --branch mausam/upgrade-versions --name=appserver --esw_version='0.1.0-SNAPSHOT'
           cd appserver
           sbt clean test
 
