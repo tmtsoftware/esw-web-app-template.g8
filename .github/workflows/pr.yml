@@ -1,0 +1,71 @@
+name: Building PR for branch against master
+
+on:
+   pull_request:
+    branches: [master]
+
+jobs:
+  PR:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout esw repo
+        uses: actions/checkout@v2
+        with:
+          repository: tmtsoftware/esw
+
+      - uses: olafurpg/setup-scala@v5
+        with:
+          java-version: adopt@1.11
+
+      - name: Install CS native
+        run: |
+          curl -fLo cs https://git.io/coursier-cli-linux
+          chmod +x cs
+          sudo mv cs /usr/local/bin
+
+      - name: Install giter8
+        run: |
+          cs install giter8
+          sudo mv /home/runner/.local/share/coursier/bin/g8 /usr/local/bin
+          cd /usr/local/bin
+          chmod +x g8
+
+      - name: Cache ~/.cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache
+          key: ${{ runner.os }}-coursier-${{ hashFiles('project/Libs.scala') }}
+          restore-keys: |
+            ${{ runner.os }}-coursier-
+
+      - name: Cache ~/.sbt
+        uses: actions/cache@v1
+        with:
+          path: ~/.sbt
+          key: ${{ runner.os }}-sbt-${{ hashFiles('project/build.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-sbt-
+
+      - name: Publish Local checked out esw repo
+        run: sbt clean publishLocal
+        
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Giter8 Compile
+        run: |
+          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${{ steps.extract_branch.outputs.branch }} --esw_version='0.1.0-SNAPSHOT'
+          cd appserver
+          sbt clean test
+
+      - name: Notify slack
+        if: always()
+        continue-on-error: true
+        uses: kpritam/slack-job-status-action@v1
+        with:
+          job-status: ${{ job.status }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: ci-nightly
