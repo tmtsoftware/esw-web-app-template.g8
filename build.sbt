@@ -1,4 +1,4 @@
 lazy val root = (project in file("."))
   .settings(
-    name := "esw.g8"
+    name := "esw-backend-template.g8"
   )
