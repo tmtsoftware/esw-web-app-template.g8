@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print branch name
-        run: echo ${GITHUB_HEAD_REF}
-        
       - name: Checkout esw repo
         uses: actions/checkout@v2
         with:
@@ -55,6 +52,8 @@ jobs:
 
       - name: Giter8 Compile
         run: |
+          echo("Running PR build for branch mentioned below") 
+          echo ${GITHUB_HEAD_REF} 
           g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${GITHUB_HEAD_REF} --esw_version='0.1.0-SNAPSHOT'
           cd appserver
           sbt clean test
