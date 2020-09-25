@@ -56,4 +56,4 @@ jobs:
         with:
           job-status: ${{ job.status }}
           slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
-          channel: ci-nightly
+          channel: ci-release
