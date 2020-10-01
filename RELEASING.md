@@ -2,7 +2,8 @@
 
 Steps to release:
 
-1. Change `esw` version in `src/main/g8/default.properties` and `README.md`
+1. Update `esw` version in `src/main/g8/default.properties` and `README.md`
+1. Update `embedded-keycloak` version in `src/main/g8/project/Libs.scala`
 1. Make sure `dev` workflow is green in actions tab in github repo
 1. Update `release.yml`
     Update step `Giter8 Compile` in `release.yml`
