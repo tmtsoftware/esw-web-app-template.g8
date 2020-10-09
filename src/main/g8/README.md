@@ -16,8 +16,13 @@ The CSW Auth service needs to be running before starting the components.
 This is done by starting the `csw-services.sh` script which is present inside `scripts` directory in CSW project.
 Follow below instructions to run Auth service:
 
-* Run `./scripts/csw-services.sh start -k` command to start auth service.
-* Run `./csw_services.sh start --help` to get more information.
+Run 
+```
+cd scripts
+./csw-services.sh start -k
+```
+This will start auth service.
+You can run `./csw_services.sh start --help` to get more information.
 
 ## Running the App
 
@@ -32,6 +37,11 @@ This will start the app with default port 8080.
 
 If you want to start the app at custom port,
 run `sbt "run start -p <port number>`
+
+You can verify whether the application has started successfully by using the endpoint in `apptest.http`.
+
+NOTE: `<host>` needs to be replaced by the host address where app is running. Port also needs to be changed 
+if custom one is used.
 
 ## How to use the project
 ```bash
