@@ -24,11 +24,13 @@ Please follow the [coursier installation](https://get-coursier.io/docs/cli-insta
 
 This template will prompt for the following parameters. Press Enter to accept the default values, shown in brackets:
 
-* name [sample]: The name of the project.
-* description [sample] : The Component Name of the Assembly
-* prefix [ESW.sample] : The prefix of the backend application.
-* organization [org.tmt]: Specifies the organization for this project.
-* version [0.0.1]: Specifies the version for this project.
-* package [org.tmt.ESW.sample]: Top level package which dynamically gets created based on provided organization and subsystem in all subprojects.
-* scala_version [2.13.1]: Specifies the Scala version for this project.
-* esw_version [c5690d3]: Specifies the Executive Software (CSW) version for this project
+* name: The name of the project.
+* organization: Specifies the organization for this project.
+* prefix: The prefix of the backend application.
+* version: Specifies the version for this project.
+* package: Top level package which dynamically gets created based on provided organization and subsystem in all subprojects.
+* scala_version: Specifies the Scala version for this project.
+* esw_version: Specifies the Executive Software (ESW) version for this project
+
+Once the project is generated, refer to project's README for instructions on how to use, build, and run the project.
+
