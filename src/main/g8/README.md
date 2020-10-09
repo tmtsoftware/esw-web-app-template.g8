@@ -13,7 +13,8 @@ See [here](https://www.scala-sbt.org/1.0/docs/Setup.html) for instructions on in
 ## Prerequisites for running App
 
 The CSW Auth service needs to be running before starting the components.
-This is done by starting the `csw-services.sh` script which is present inside `scripts` directory in CSW project.
+This is done by starting the `csw-services.sh` script which is present inside `scripts` directory in CSW project
+(`csw` version should be same as that being used in `esw` for this project).
 Follow below instructions to run Auth service:
 
 Run 
