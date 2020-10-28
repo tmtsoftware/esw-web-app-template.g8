@@ -18,12 +18,12 @@ Follow below instructions to run Auth service:
 Run 
 ```
 cs install csw-services:<version>
-csw-services start -k
+csw-services start --auth
 ```
 NOTE: version should be same as that being used in `ESW` for this project.
 
 This will start auth service.
-You can run `csw_services.sh start --help` to get more information.
+You can run `csw-services start --help` to get more information.
 
 ## Running the App
 
