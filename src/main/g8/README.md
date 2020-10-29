@@ -28,14 +28,9 @@ You can run `csw-services start --help` to get more information.
 ## Running the App
 
 Before we start the app we need to set the following env variables:
-* INTERFACE_NAME
-* PUBLIC_INTERFACE_NAME
 * TMT_LOG_HOME
 
 To set environment variable use command `export <ENV_VAR> = <VALUE>`
-
-For local machines, in most cases the `INTERFACE_NAME` and `PUBLIC_INTERFACE_NAME` can be set as the primary machine 
-interface name. For example, `en0`.
 
 To start the app run:
 `sbt "run start"`
