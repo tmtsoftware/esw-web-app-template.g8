@@ -43,7 +43,7 @@ This will start the app with default port 8080.
 If you want to start the app at custom port,
 run `sbt "run start -p <port number>`
 
-You can verify whether the application has started successfully by using the endpoint in `apptest.http` (e.g. using `curl`).
+You can verify whether the application has started successfully by using the endpoint in `apptest.http` (e.g. using `curl` or a tool like [postman](https://www.postman.com/)).
 
 NOTE: `<host>` needs to be replaced by the host address where app is running. Port also needs to be changed 
 if custom one is used.
@@ -61,7 +61,7 @@ After you choose which language you want to develop in, you can delete the other
 It has good support for asynchronous programming.
 
 * The routes can be added in [$name;format="Camel"$Route](./src/main/scala/org/tmt/$name;format="lower"$/http/$name;format="Camel"$Route.scala).
-Some example routes are already available.
+Some example routes have been provided.
 
 * For adding a new authorization policy to your routes, the policy must be added to `securityDirectives` while defining the route.
 For example, if you want to add policy such that only `esw-admin` should be able to access some route, then it could be done as shown
@@ -75,14 +75,14 @@ in below snippet. More information about authorization policies can be found in 
 ```
 
 * The API implementation can be added in [$name;format="Camel"$Impl](./src/main/scala/org/tmt/$name;format="lower"$/core/$name;format="Camel"$Impl.scala).
-This template provides some routes that serve as examples. If Java is your preferred language, then the implementation
+This template provides an implementation that matches the example routes. If Java is your preferred language, then the implementation
 can be added as shown in [J$name;format="Camel"$Impl](./src/main/java/org/tmt/$name;format="lower"$/core/J$name;format="Camel"$Impl.java). In this case, a Scala
 is required, as shown in [J$name;format="Camel"$ImplWrapper](./src/main/scala/org/tmt/$name;format="lower"$/http/J$name;format="Camel"$ImplWrapper.scala)
 
 * Core models for supporting the APIs should be added in the [models](./src/main/scala/org/tmt/$name;format="lower"$/core/models) package.
 Codecs for these models should be added in [HttpCodecs](./src/main/scala/org/tmt/$name;format="lower"$/http/HttpCodecs.scala).
 
-* [$name;format="Camel"$Wiring](./src/main/scala/org/tmt/$name;format="lower"$/$name;format="Camel"$Wiring.scala) is where we wire up our implementation with our routes.
+* [$name;format="Camel"$Wiring](./src/main/scala/org/tmt/$name;format="lower"$/$name;format="Camel"$Wiring.scala) is where the implementation wired up with the routes.
 
 * [$name;format="Camel"$App](./src/main/scala/org/tmt/$name;format="lower"$/$name;format="Camel"$App.scala) is the main runnable application. The command line arguments 
 for starting the app are defined in [$name;format="Camel"$AppCommand](./src/main/scala/org/tmt/$name;format="lower"$/$name;format="Camel"$AppCommand.scala). Any new command  
