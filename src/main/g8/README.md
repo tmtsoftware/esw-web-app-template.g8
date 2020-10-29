@@ -27,13 +27,13 @@ You can run `csw-services start --help` to get more information.
 ## Running the App
 
 Before we start the app we need to set the following environment variables:
-* INTERFACE_NAME
-* PUBLIC_INTERFACE_NAME
 * TMT_LOG_HOME
 
 To set environment variables, use the command `export <ENV_VAR> = <VALUE>`
 
-For development, the `INTERFACE_NAME` and `PUBLIC_INTERFACE_NAME` can be set as the primary machine 
+By default, an interface name will be selected for you.  However, if you are having problems or have more than a single network interface, you may need to set
+the environment variables `INTERFACE_NAME` and `PUBLIC_INTERFACE_NAME` explicitly.  For development, these two variables 
+can be set to the primary machine 
 interface name. For example, `en0`.  See the CSW documention on [Network Topology](http://tmtsoftware.github.io/csw/deployment/network-topology.html) for more information.
 
 To start the app, run:
