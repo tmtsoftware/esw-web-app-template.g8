@@ -7,6 +7,7 @@ scalaVersion := "2.13.3"
 resolvers += "jitpack" at "https://jitpack.io"
 resolvers += "bintray" at "https://jcenter.bintray.com"
 fork := true
+run / javaOptions += "-Dcsw-networks.hostname.automatic=on"
 
 libraryDependencies ++= Seq(
   Libs.`esw-http-template-wiring` % "compile->compile;test->test",
