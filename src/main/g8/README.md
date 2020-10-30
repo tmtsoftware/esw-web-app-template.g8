@@ -16,10 +16,9 @@ The CSW AAS Service needs to be running before starting the components.
 Follow below instructions to run AAS:
 
 ```
-cs install csw-services:<version>
+cs install csw-services:v3.0.0-M1
 csw-services start --auth
 ```
-NOTE: version should be the appropriate [CSW release](https://github.com/tmtsoftware/csw/releases) for the ESW version used in this project ($esw_version$).
 
 This will start AAS.
 You can run `csw-services start --help` to get more information.
@@ -34,7 +33,7 @@ To set environment variables, use the command `export <ENV_VAR> = <VALUE>`
 By default, an interface name will be selected for you.  However, if you are having problems or have more than a single network interface, you may need to set
 the environment variables `INTERFACE_NAME` and `PUBLIC_INTERFACE_NAME` explicitly.  For development, these two variables 
 can be set to the primary machine 
-interface name. For example, `en0`.  See the CSW documention on [Network Topology](http://tmtsoftware.github.io/csw/deployment/network-topology.html) for more information.
+interface name. For example, `en0`.  See the CSW documentation on [Network Topology](http://tmtsoftware.github.io/csw/deployment/network-topology.html) for more information.
 
 To start the app, run:
 `sbt "run start"`

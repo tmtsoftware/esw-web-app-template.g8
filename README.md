@@ -30,7 +30,6 @@ This template will prompt for the following parameters. Press Enter to accept th
 * version: Specifies the version for this project.
 * package: Top level package which dynamically gets created based on provided organization and subsystem in all subprojects.
 * scala_version: Specifies the Scala version for this project.
-* esw_version: Specifies the Executive Software (ESW) version for this project
 
 Once the project is generated, refer to project's README for instructions on how to use, build, and run the project.
 
