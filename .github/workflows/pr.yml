@@ -54,6 +54,6 @@ jobs:
         run: |
           echo("Running PR build for branch mentioned below") 
           echo ${GITHUB_HEAD_REF} 
-          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${GITHUB_HEAD_REF} --esw_version='0.1.0-SNAPSHOT'
+          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${GITHUB_HEAD_REF}
           cd appserver
           sbt clean test

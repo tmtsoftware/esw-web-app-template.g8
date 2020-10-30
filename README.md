@@ -20,7 +20,7 @@ Please follow the [coursier installation](https://get-coursier.io/docs/cli-insta
 
 ### Create new project using giter8 template
 
-`g8 tmtsoftware/esw-backend-template.g8`
+`g8 tmtsoftware/esw-backend-template.g8 -t v0.1.0-M1`
 
 This template will prompt for the following parameters. Press Enter to accept the default values, shown in brackets:
 
@@ -34,3 +34,11 @@ This template will prompt for the following parameters. Press Enter to accept th
 
 Once the project is generated, refer to project's README for instructions on how to use, build, and run the project.
 
+
+---
+**NOTE**
+Following section is intended only for testing purpose and can be skipped by the consumers of template.
+---
+#### Testing the template
+
+For people interested in testing the template with latest commit on main branch, refer [testing.md](./testing.md)
