@@ -12,7 +12,7 @@ The created project contains a sample backend application which includes the fol
 ## Getting Started
 
 ### Install Coursier
-Please follow the [coursier installation](https://get-coursier.io/docs/cli-installation)
+Steps for installing coursier are documented [here](https://tmtsoftware.github.io/csw/apps/csinstallation.html) 
 
 ### Install Giter8
 
@@ -20,7 +20,7 @@ Please follow the [coursier installation](https://get-coursier.io/docs/cli-insta
 
 ### Create new project using giter8 template
 
-`g8 tmtsoftware/esw-backend-template.g8 -t v0.1.0-M1`
+`g8 tmtsoftware/esw-backend-template.g8`
 
 This template will prompt for the following parameters. Press Enter to accept the default values, shown in brackets:
 

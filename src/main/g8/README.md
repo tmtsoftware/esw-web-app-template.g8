@@ -12,6 +12,9 @@ See [here](https://www.scala-sbt.org/1.0/docs/Setup.html) for instructions on in
 
 ## Prerequisites for Running App
 
+We recommend using coursier for installing and running the apps. Steps for installing coursier are documented 
+[here](https://tmtsoftware.github.io/csw/apps/csinstallation.html) 
+
 The CSW AAS Service needs to be running before starting the components.
 Follow below instructions to run AAS:
 

@@ -1,9 +1,12 @@
-name: release sanity
+name: release
 
 on:
   push:
     tags:
       - "v*"
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   g8:
@@ -45,7 +48,7 @@ jobs:
 
       - name: Giter8 Compile
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 -t v0.1.0-M1 --name=appserver
+          g8 tmtsoftware/esw-backend-template.g8 --name=appserver
           cd appserver
           sbt clean test
 
