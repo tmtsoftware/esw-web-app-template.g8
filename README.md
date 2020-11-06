@@ -37,7 +37,7 @@ Once the project is generated, refer to project's README for instructions on how
 ---
 **NOTE**
 Following section is intended only for testing purpose and can be skipped by the consumers of template.
----
+
 #### Testing the template
 
-For people interested in testing the template with latest commit on main branch, refer [testing.md](./testing.md)
+For people interested in testing the template with the latest commit on the master branch, refer [TESTING.md](TESTING.md)
