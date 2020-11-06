@@ -23,8 +23,8 @@ cs install csw-services:v3.0.0-M1
 csw-services start --auth
 ```
 
-**Note**: `csw-services` version should be compatible with the `esw` version specified in [Libs.scala](project/Libs.scala). 
-You can refer the esw to csw version compatibility table [here](https://github.com/tmtsoftware/esw/blob/master/README.md).
+**Note**: `csw-services` version should be compatible with the `ESW` version specified in [Libs.scala](project/Libs.scala). 
+You can refer the ESW to CSW version compatibility table [here](https://github.com/tmtsoftware/esw/blob/master/README.md).
 
 This will start AAS.
 You can run `csw-services start --help` to get more information.

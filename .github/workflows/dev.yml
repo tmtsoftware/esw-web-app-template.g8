@@ -1,4 +1,4 @@
-name: Dev ci for master
+name: dev CI
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout esw repo
+      - name: Checkout ESW repo
         uses: actions/checkout@v2
         with:
           repository: tmtsoftware/esw
@@ -52,7 +52,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-
 
-      - name: Publish Local checked out esw repo
+      - name: Publish Local checked out ESW repo
         run: sbt clean publishLocal
 
       - name: Giter8 Compile
@@ -69,4 +69,4 @@ jobs:
         with:
           job-status: ${{ job.status }}
           slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
-          channel: ci-nightly
+          channel: ci-dev

@@ -2,7 +2,7 @@ This is a Giter8 template for a TMT backend which creates a sample sbt project.
 
 The created project contains a sample backend application which includes the following :
 
-* Server wiring along which has handles of all csw services (SampleWiring.scala)
+* Server wiring along which has handles of all CSW services (SampleWiring.scala)
 * Backend routes for various use cases (SampleRoute.scala)
 * Sample Api and its implementation for both scala and java (SampleImpl.scala, JSampleImpl.java, JSampleImplWrapper.scala)
 * Models and their (de)Serialization using borer (HttpCodecs.scala)
