@@ -40,4 +40,4 @@ Following section is intended only for testing purpose and can be skipped by the
 
 #### Testing the template
 
-For people interested in testing the template with the latest commit on the master branch, refer [TESTING.md](TESTING.md)
+For people interested in testing the template with the latest commit on the dev branch (Active development branch), refer [TESTING.md](TESTING.md)
