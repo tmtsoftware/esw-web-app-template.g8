@@ -11,5 +11,5 @@ Steps to release:
    **Note:** `PROD=true` environment variable needs to be set before running `release.sh`
 1. After release is complete, change the `esw` version back to `0.1.0-SNAPSHOT` in `src/main/g8/project/Libs.scala` in dev branch
 
-**Note:** Tagging csw.g8 will again trigger `release` workflow in github actions tab. This will help in release status lookup 
+**Note:** Tagging csw.g8 will again trigger `release` workflow in github actions tab. This will help in release status lookup
 in the future.
