@@ -28,7 +28,7 @@ jobs:
       - name: Install giter8
         run: |
           cs install giter8
-          sudo mv /home/runner/.local/share/coursier/bin/g8 /usr/local/bin
+          sudo mv /home/runner/cs/bin/g8 /usr/local/bin
           cd /usr/local/bin
           chmod +x g8
 
