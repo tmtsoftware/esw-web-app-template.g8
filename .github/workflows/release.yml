@@ -5,15 +5,13 @@ on:
     tags:
       - "v*"
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   g8:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: olafurpg/setup-scala@v5
+      - uses: olafurpg/setup-scala@v10
         with:
           java-version: adopt@1.11
 

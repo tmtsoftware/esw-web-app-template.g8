@@ -4,7 +4,7 @@ on:
   push:
     branches: [ dev ]
   pull_request:
-    branches: [ dev ]
+    branches: [ dev, master ]
 
   schedule:
     - cron: "30 18 * * *" # run at 00:00 AM IST
@@ -19,20 +19,16 @@ jobs:
         with:
           repository: tmtsoftware/esw
 
-      - uses: olafurpg/setup-scala@v5
+      - uses: laughedelic/coursier-setup@v1
         with:
-          java-version: adopt@1.11
-
-      - name: Install CS native
-        run: |
-          curl -fLo cs https://git.io/coursier-cli-linux
-          chmod +x cs
-          sudo mv cs /usr/local/bin
+          jvm: 11
+          apps: sbt sbtn
+      - uses: coursier/cache-action@v5
 
       - name: Install giter8
         run: |
           cs install giter8
-          sudo mv /home/runner/.local/share/coursier/bin/g8 /usr/local/bin
+          sudo mv /home/runner/cs/bin/g8 /usr/local/bin
           cd /usr/local/bin
           chmod +x g8
 
@@ -53,14 +49,27 @@ jobs:
             ${{ runner.os }}-sbt-
 
       - name: Publish Local checked out ESW repo
-        run: sbt clean publishLocal
+        run: |
+            sbtn clean 
+            sbtn publishLocal
+
+      - name: Extract branch name (Trigger - PR)
+        if: github.event_name == 'pull_request'
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF})" >> $GITHUB_ENV
+
+      - name: Extract branch name (Trigger - Push)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+        id: extract_branch
 
       - name: Giter8 Compile
         run: |
-          echo "Running build for branch ${GITHUB_REF#refs/heads/}"
-          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${GITHUB_REF#refs/heads/}
+          echo "Running build for branch ${BRANCH_NAME}"
+          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${BRANCH_NAME}
           cd appserver
-          sbt clean test
+          sbtn clean 
+          sbtn test
 
       - name: Notify slack
         if: always()
