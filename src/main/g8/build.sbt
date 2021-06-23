@@ -2,7 +2,7 @@ name := "$name;format="lower"$"
 
 version := "$version$"
 
-scalaVersion := "$scala_version$"
+scalaVersion := "2.13.5"
 
 resolvers += "jitpack" at "https://jitpack.io"
 resolvers += "bintray" at "https://jcenter.bintray.com"
