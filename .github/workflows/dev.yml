@@ -19,7 +19,7 @@ jobs:
         with:
           repository: tmtsoftware/esw
 
-      - uses: laughedelic/coursier-setup@v1
+      - uses: coursier/setup-action@v1
         with:
           jvm: 11
           apps: sbt sbtn
@@ -62,6 +62,10 @@ jobs:
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
         id: extract_branch
+      
+      - name: Set branch name (trigger - Schedule)
+        if: github.event_name == 'schedule'
+        run: echo "BRANCH_NAME=dev" >> $GITHUB_ENV
 
       - name: Giter8 Compile
         run: |
