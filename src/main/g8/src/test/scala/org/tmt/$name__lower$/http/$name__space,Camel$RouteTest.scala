@@ -21,7 +21,7 @@ import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import org.scalatest.wordspec.AnyWordSpec
 import org.tmt.$name;format="lower"$.TestHelper
 import org.tmt.$name;format="lower"$.core.$name;format="space,Camel"$Impl
-import org.tmt.$name;format="lower"$.core.models.{Person, $name;format="space,Camel"$Response}
+import org.tmt.$name;format="lower"$.core.models.{UserInfo, $name;format="space,Camel"$Response}
 
 import scala.concurrent.Future
 import scala.util.Random
@@ -41,10 +41,11 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
   "$name;format="space,Camel"$Route" must {
     "sayHello must delegate to service1.sayHello" in {
       val response = $name;format="space,Camel"$Response(Random.nextString(10))
-      when(service1.sayHello()).thenReturn(Future.successful(response))
+      val john     = UserInfo("John", "Smith")
+      when(service1.sayHello(john)).thenReturn(Future.successful(response))
 
-      Get("/sayHello") ~> route ~> check {
-        verify(service1).sayHello()
+      Get("/sayHello", john) ~> route ~> check {
+        verify(service1).sayHello(UserInfo("John", "Smith"))
         responseAs[$name;format="space,Camel"$Response] should ===(response)
       }
     }
@@ -62,12 +63,12 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
     "securedSayHello must check for Esw-user role and delegate to service1.securedSayHello" in {
       val response = $name;format="space,Camel"$Response(Random.nextString(10))
       val policy   = RealmRolePolicy("Esw-user")
-      val john     = Person("John")
+      val john     = UserInfo("John", "Smith")
       when(securityDirectives.sPost(policy)).thenReturn(accessTokenDirective)
       when(service1.securedSayHello(john)).thenReturn(Future.successful(Some(response)))
 
       Post("/securedSayHello", john) ~> route ~> check {
-        verify(service1).securedSayHello(Person("John"))
+        verify(service1).securedSayHello(UserInfo("John", "Smith"))
         verify(securityDirectives).sPost(policy)
         responseAs[Option[$name;format="space,Camel"$Response]] should ===(Some(response))
       }
@@ -92,17 +93,17 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
   }
 
   "delegate to websocket greeter" in {
-    val person            = Person("Peter")
+    val userInfo            = UserInfo("Peter", "Smith")
     val $name;format="lower"$ResponseMsg = TestHelper.randomString(10)
     val $name;format="lower"$Response    = $name;format="space,Camel"$Response($name;format="lower"$ResponseMsg)
-    when(service1.sayHelloStream(person)).thenReturn(Source.single($name;format="lower"$Response))
+    when(service1.sayHelloStream(userInfo)).thenReturn(Source.single($name;format="lower"$Response))
     val wsClient = WSProbe()
 
     WS("/greeter", wsClient.flow) ~> route ~>
       check {
         isWebSocketUpgrade shouldEqual true
 
-        wsClient.sendMessage(Json.encode(person).toUtf8String)
+        wsClient.sendMessage(Json.encode(userInfo).toUtf8String)
         wsClient.expectMessage(Json.encode($name;format="lower"$Response).toUtf8String)
 
         wsClient.sendCompletion()

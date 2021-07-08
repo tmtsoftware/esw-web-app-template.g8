@@ -25,7 +25,7 @@ import org.tmt.embedded_keycloak.impl.StopHandle
 import org.tmt.embedded_keycloak.utils.BearerToken
 import org.tmt.embedded_keycloak.{EmbeddedKeycloak, KeycloakData, Settings}
 import org.tmt.$name;format="lower"$.$name;format="space,Camel"$Wiring
-import org.tmt.$name;format="lower"$.core.models.{Person, $name;format="space,Camel"$Response}
+import org.tmt.$name;format="lower"$.core.models.{UserInfo, $name;format="space,Camel"$Response}
 import org.tmt.$name;format="lower"$.http.HttpCodecs
 
 import scala.concurrent.duration.DurationInt
@@ -72,37 +72,39 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
 
     "should call sayHello and return $name;format="lower"$Response as a result" in {
       val token = getToken("admin", "password1")()
+      val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.GET,
         uri = appUri.withPath(Path / "sayHello"),
-        headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil)
+        headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil),
+        entity = HttpEntity(ContentTypes.`application/json`, Json.encode(userInfo).toUtf8String.getBytes)
       )
 
       val response: HttpResponse = Http().singleRequest(request).futureValue
       response.status should ===(StatusCode.int2StatusCode(200))
-      Unmarshal(response).to[$name;format="space,Camel"$Response].futureValue should ===($name;format="space,Camel"$Response("Hello!!!"))
+      Unmarshal(response).to[$name;format="space,Camel"$Response].futureValue should ===($name;format="space,Camel"$Response(s"Hello user: \${userInfo.firstname} \${userInfo.lastname}!!!"))
     }
 
     "should call securedSayHello and return $name;format="lower"$Response as a result" in {
       val token  = getToken("admin", "password1")()
-      val person = Person("John")
+      val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.POST,
         uri = appUri.withPath(Path / "securedSayHello"),
         headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil),
-        entity = HttpEntity(ContentTypes.`application/json`, Json.encode(person).toUtf8String.getBytes())
+        entity = HttpEntity(ContentTypes.`application/json`, Json.encode(userInfo).toUtf8String.getBytes())
       )
 
       val response: HttpResponse = Http().singleRequest(request).futureValue
 
       response.status should ===(StatusCode.int2StatusCode(200))
       Unmarshal(response).to[Option[$name;format="space,Camel"$Response]].futureValue should ===(
-        Some($name;format="space,Camel"$Response(s"Secured Hello!!! \${person.name}"))
+        Some($name;format="space,Camel"$Response(s"Hello secured user: \${userInfo.firstname} \${userInfo.lastname}!!!"))
       )
     }
 
     "should call locations and return 401 as a result without valid token" in {
-      val person = Person("John")
+      val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.GET,
         uri = appUri.withPath(Path / "locations"),
@@ -116,12 +118,12 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
 
     "should call securedSayHello and return 403 as a result without required role" in {
       val token  = getToken("nonAdmin", "password2")()
-      val person = Person("John")
+      val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.POST,
         uri = appUri.withPath(Path / "securedSayHello"),
         headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil),
-        entity = HttpEntity(ContentTypes.`application/json`, Json.encode(person).toUtf8String.getBytes())
+        entity = HttpEntity(ContentTypes.`application/json`, Json.encode(userInfo).toUtf8String.getBytes())
       )
 
       val response: HttpResponse = Http().singleRequest(request).futureValue
@@ -146,14 +148,14 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
     }
 
     "should call greeter and return stream response as a result" in {
-      val person    = Person("John")
+      val userInfo    = UserInfo("John", "Smith")
       val uri       = appLocation.uri
       val wsRequest = WebSocketRequest(uri = s"ws://\${uri.getHost}:\${uri.getPort}/greeter")
 
       val (connectionSink, connectionSource) =
         Source.asSubscriber[Message].mapMaterializedValue(Sink.fromSubscriber).preMaterialize()
 
-      val requestSource = Source.single(TextMessage.Strict(encode(person))).concat(Source.maybe) // adding person request
+      val requestSource = Source.single(TextMessage.Strict(encode(userInfo))).concat(Source.maybe) // adding userInfo request
       val flow          = Flow.fromSinkAndSourceCoupled(connectionSink, requestSource)
 
       Http().singleWebSocketRequest(wsRequest, flow) // send request
@@ -166,7 +168,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
         .run()
 
       // assert on response
-      val expectedRes = $name;format="space,Camel"$Response("Hello!!! " + person.name)
+      val expectedRes = $name;format="space,Camel"$Response(s"Hello user: \${userInfo.firstname} \${userInfo.lastname}!!!")
       eventually(Timeout(1600.millis)) { // 3 msg with 500 millis interval
         val responses = responsesF.futureValue
         responses.size shouldBe 3
@@ -176,7 +178,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
     }
   }
 
-  private def encode(person: Person) = Json.encode(person).toUtf8String
+  private def encode(userInfo: UserInfo) = Json.encode(userInfo).toUtf8String
 
   private def decode$name;format="space,Camel"$Res(msg: TextMessage.Strict) = Json.decode(msg.text.getBytes()).to[$name;format="space,Camel"$Response].value
 
