@@ -1,12 +1,6 @@
 import { render, RenderResult } from '@testing-library/react'
 import { Auth, AuthContext, LocationService } from '@tmtsoftware/esw-ts'
-import type {
-  KeycloakProfile,
-  KeycloakPromise,
-  KeycloakResourceAccess,
-  KeycloakRoles,
-  KeycloakTokenParsed
-} from '@tmtsoftware/esw-ts/dist/src/utils/TestUtils'
+import type { TestUtils } from '@tmtsoftware/esw-ts'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { instance, mock } from 'ts-mockito'
@@ -15,7 +9,7 @@ import { LocationServiceProvider } from '../../src/components/contexts/LocationS
 class MockedFetch {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   fetch(input: RequestInfo, init?: RequestInit): Promise<Response> {}
 }
 
@@ -35,17 +29,20 @@ const getMockAuth = (loggedIn: boolean): Auth => {
     isAuthenticated: () => loggedInValue,
     logout: () => {
       loggedInValue = false
-      return Promise.resolve() as KeycloakPromise<void, void>
+      return Promise.resolve() as TestUtils.KeycloakPromise<void, void>
     },
     token: () => 'token string',
     tokenParsed: () =>
       ({
         preferred_username: loggedIn ? 'esw-user' : undefined
-      } as KeycloakTokenParsed),
-    realmAccess: () => [''] as unknown as KeycloakRoles,
-    resourceAccess: () => [''] as unknown as KeycloakResourceAccess,
+      } as TestUtils.KeycloakTokenParsed),
+    realmAccess: () => [''] as unknown as TestUtils.KeycloakRoles,
+    resourceAccess: () => [''] as unknown as TestUtils.KeycloakResourceAccess,
     loadUserProfile: () =>
-      Promise.resolve({}) as KeycloakPromise<KeycloakProfile, void>
+      Promise.resolve({}) as TestUtils.KeycloakPromise<
+        TestUtils.KeycloakProfile,
+        void
+      >
   }
 }
 
