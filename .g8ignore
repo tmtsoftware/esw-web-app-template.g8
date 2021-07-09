@@ -1,0 +1,7 @@
+/.gitignore
+/README.md
+.git
+/RELEASING.md
+/TESTING.md
+.github
+release.sh

@@ -1,0 +1,64 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+    branches: [ master ]
+
+jobs:
+  g8:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      # https://www.pika.dev/npm/snowpack/discuss/444
+      # following step is needed because snowpack is watching files from node_modules as well
+      - name: increase file watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      - uses: actions/setup-node@v1
+        with:
+            node-version: "14.x"
+            registry-url: "https://registry.npmjs.org"
+
+      - name: Cache ~/.npm
+        uses: actions/cache@v1
+        with:
+            path: ~/.npm
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
+
+      - name: Install CS native
+        run: |
+            curl -fLo cs https://git.io/coursier-cli-linux
+            chmod +x cs
+            sudo mv cs /usr/local/bin
+
+      - name: Install giter8
+        run: |
+            cs install giter8
+            sudo mv /home/runner/.local/share/coursier/bin/g8 /usr/local/bin
+            cd /usr/local/bin
+            chmod +x g8
+
+      - name: create new project from esw-ui-template.g8 template with specified version
+        run: |
+            g8 tmtsoftware/esw-ui-template.g8 --project_name=ui-app
+
+      - name: Build - UI app
+        working-directory: ./ui-app
+        run: |
+            npm install
+            npm run build
+            npm run test
+
+      - name: Notify slack
+        if: always()
+        continue-on-error: true
+        uses: kpritam/slack-job-status-action@v1
+        with:
+          job-status: ${{ job.status }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: ci-release

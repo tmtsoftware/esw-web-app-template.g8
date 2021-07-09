@@ -1,0 +1,6 @@
+{
+  "short_name": "$project_name$",
+  "name": "$project_name$",
+  "start_url": "./index.html",
+  "display": "standalone"
+}
