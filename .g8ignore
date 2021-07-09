@@ -5,3 +5,5 @@
 /TESTING.md
 .github
 release.sh
+/build.sbt
+/LICENSE
