@@ -5,7 +5,6 @@ version := "$version$"
 scalaVersion := "2.13.5"
 
 resolvers += "jitpack" at "https://jitpack.io"
-resolvers += "bintray" at "https://jcenter.bintray.com"
 fork := true
 run / javaOptions += "-Dcsw-networks.hostname.automatic=on"
 
