@@ -1,4 +1,4 @@
-# $project_name$
+# $name$
 
 This project is a sample React web application.
 

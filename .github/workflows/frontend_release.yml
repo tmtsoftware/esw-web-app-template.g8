@@ -45,7 +45,7 @@ jobs:
 
       - name: create new project from esw-ui-template.g8 template with specified version
         run: |
-            g8 tmtsoftware/esw-ui-template.g8 --project_name=ui-app
+            g8 tmtsoftware/esw-ui-template.g8 --name=ui-app
 
       - name: Build - UI app
         working-directory: ./ui-app

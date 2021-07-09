@@ -1,5 +1,5 @@
 {
-  "name": "$project_name$",
+  "name": "$name$",
   "author": "$author_name$",
   "version": "$version$",
   "license": "Apache License, Version 2.0",
