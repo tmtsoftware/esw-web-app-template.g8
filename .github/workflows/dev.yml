@@ -14,6 +14,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+      # https://www.pika.dev/npm/snowpack/discuss/444
+      # following step is needed because snowpack is watching files from node_modules as well
+      - name: increase file watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      - uses: actions/setup-node@v1
+        with:
+            node-version: "15.x"
+            registry-url: "https://registry.npmjs.org"
+
+      - name: Cache ~/.npm
+        uses: actions/cache@v1
+        with:
+            path: ~/.npm
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-node-
+
       - name: Checkout ESW repo
         uses: actions/checkout@v2
         with:
@@ -67,13 +86,23 @@ jobs:
         if: github.event_name == 'schedule'
         run: echo "BRANCH_NAME=dev" >> $GITHUB_ENV
 
-      - name: Giter8 Compile
+      - name: create new project from esw-backend-template.g8 template
         run: |
           echo "Running build for branch ${BRANCH_NAME}"
-          g8 tmtsoftware/esw-backend-template.g8 --name=appserver --branch ${BRANCH_NAME}
-          cd appserver
+          g8 tmtsoftware/esw-backend-template.g8 --name=sample --branch ${BRANCH_NAME}
+
+      - name: Build - backend app
+        working-directory: ./sample/backend
+        run: |
           sbtn clean 
           sbtn test
+
+      - name: Build - frontend app
+        working-directory: ./sample/frontend
+        run: |
+            npm install
+            npm run build
+            npm run test          
 
       - name: Notify slack
         if: always()
