@@ -16,6 +16,7 @@ const UserForm = ({
 }): JSX.Element => {
   const locationService = useLocationService()
   const { auth } = useContext(AuthContext)
+  const secured = isSecured ? 'Secured' : ''
 
   const onFinish = async (values: UserInfoRequest) => {
     const backendLocation = await resolveBackendUrl(locationService)
@@ -51,7 +52,9 @@ const UserForm = ({
         onFinish={onFinish}
         className={styles.formBody}>
         <Form.Item className={styles.formHeader}>
-          <Typography.Title level={4}>{'User Info:'}</Typography.Title>
+          <Typography.Title level={4}>
+            {`${secured} User Info:`}
+          </Typography.Title>
         </Form.Item>
         <Form.Item
           label='FirstName'

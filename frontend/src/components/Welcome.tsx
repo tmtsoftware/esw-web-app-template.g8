@@ -12,7 +12,7 @@ const Welcome = (): JSX.Element => {
 
   return (
     <Title style={{ marginTop: 8 }} level={4}>
-      Welcome {username ? username : 'Visitor'} !!!{' '}
+      Welcome {username ? username : 'Guest'} !!!{' '}
     </Title>
   )
 }
