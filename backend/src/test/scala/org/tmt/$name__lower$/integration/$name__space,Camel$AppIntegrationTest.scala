@@ -74,7 +74,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
       val token = getToken("admin", "password1")()
       val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
-        HttpMethods.GET,
+        HttpMethods.POST,
         uri = appUri.withPath(Path / "sayHello"),
         headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil),
         entity = HttpEntity(ContentTypes.`application/json`, Json.encode(userInfo).toUtf8String.getBytes)

@@ -14,18 +14,19 @@ import scala.concurrent.ExecutionContext
 
 class $name;format="space,Camel"$Route(service1: $name;format="space,Camel"$Impl, service2: J$name;format="space,Camel"$ImplWrapper, securityDirectives: SecurityDirectives) (implicit  ec: ExecutionContext) extends HttpCodecs {
 
-  val route: Route = path("sayHello") {
+  val route: Route = post { path("sayHello") {
     entity(as[UserInfo]) { userInfo =>
       complete(service1.sayHello(userInfo))
         }
-    } ~
-    path("sayBye") {
-      complete(service2.sayBye())
     } ~
     path("securedSayHello") {
       securityDirectives.sPost(RealmRolePolicy("Esw-user")) { token =>
         entity(as[UserInfo]) { userInfo => complete(service1.securedSayHello(userInfo)) }
       }
+    }
+  } ~
+    path("sayBye") {
+      complete(service2.sayBye())
     } ~
     path("locations") {
       securityDirectives.sGet(RealmRolePolicy("Esw-admin")) { token =>

@@ -43,7 +43,7 @@ interface name. For example, `en0`.  See the CSW documentation on [Network Topol
 
 To start the app, run:
 `sbt "run start"`
-This will start the app with default port 8080. 
+This will start the app with default port 8084. 
 
 If you want to start the app at custom port,
 run `sbt "run start -p <port number>`

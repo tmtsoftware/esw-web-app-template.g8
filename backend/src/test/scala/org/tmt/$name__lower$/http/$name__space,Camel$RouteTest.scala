@@ -44,7 +44,7 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
       val john     = UserInfo("John", "Smith")
       when(service1.sayHello(john)).thenReturn(Future.successful(response))
 
-      Get("/sayHello", john) ~> route ~> check {
+      Post("/sayHello", john) ~> route ~> check {
         verify(service1).sayHello(UserInfo("John", "Smith"))
         responseAs[$name;format="space,Camel"$Response] should ===(response)
       }

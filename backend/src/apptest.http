@@ -1,2 +1,8 @@
 #### Request to test sayHello endpoint
-GET http://<host>:8080/sayHello
+POST http://<host>:8084/sayHello
+Content-Type: application/json
+
+{
+"firstname":"Test",
+"lastname":"User"
+}
