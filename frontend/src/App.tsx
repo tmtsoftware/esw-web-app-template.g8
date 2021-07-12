@@ -1,8 +1,9 @@
-import { LocationService } from '@tmtsoftware/esw-ts'
+import { AuthContextProvider, LocationService } from '@tmtsoftware/esw-ts'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import { LocationServiceProvider } from './components/contexts/LocationServiceContext'
+import { MenuBar } from './components/navigation/Menu'
 import { AppConfig } from './config/AppConfig'
 import { Routes } from './routes/Routes'
 
@@ -26,9 +27,13 @@ const App = (): JSX.Element => {
       {locService && !loading && (
         <div>
           <LocationServiceProvider locationService={locService}>
-            <Router basename={basename}>
-              <Routes />
-            </Router>
+            <AuthContextProvider
+              config={{ realm: 'TMT', clientId: 'tmt-frontend-app' }}>
+              <Router basename={basename}>
+                <MenuBar />
+                <Routes />
+              </Router>
+            </AuthContextProvider>
           </LocationServiceProvider>
         </div>
       )}
