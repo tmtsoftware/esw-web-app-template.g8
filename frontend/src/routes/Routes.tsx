@@ -22,7 +22,7 @@ export const Routes = (): JSX.Element => {
             // #checkLogin-component-usage
           )}
         />
-        <Route path='*' component={() => <div>not found</div>} /> // TODO use antd not found 
+        <Route path='*' component={() => <div>not found</div>} /> 
       </Switch>
     </AuthContextProvider>
   )
