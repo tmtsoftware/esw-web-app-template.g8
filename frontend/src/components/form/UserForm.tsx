@@ -53,7 +53,7 @@ const UserForm = ({
         className={styles.formBody}>
         <Form.Item className={styles.formHeader}>
           <Typography.Title level={4}>
-            {`${secured} User Info:`}
+            {`\${secured} User Info:`}
           </Typography.Title>
         </Form.Item>
         <Form.Item
