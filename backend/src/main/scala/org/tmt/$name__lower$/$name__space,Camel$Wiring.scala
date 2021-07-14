@@ -9,7 +9,7 @@ class $name;format="space,Camel"$Wiring(val port: Option[Int]) extends ServerWir
   override val actorSystemName: String = "$name$-actor-system"
 
   lazy val j$name;format="space,Camel"$Impl: J$name;format="space,Camel"$Impl = new J$name;format="space,Camel"$Impl(jCswServices)
-  lazy val $name;format="lower"$Impl               = new $name;format="space,Camel"$Impl(cswServices)
+  lazy val $name;format="lower"$Impl               = new $name;format="space,Camel"$Impl()
   lazy val $name;format="lower"$ImplWrapper        = new J$name;format="space,Camel"$ImplWrapper(j$name;format="space,Camel"$Impl)
 
   import actorRuntime.ec

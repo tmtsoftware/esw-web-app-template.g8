@@ -1,20 +1,16 @@
 package org.tmt.$name;format="lower"$.http
 
-import java.net.URI
-
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.BasicDirectives
-import akka.http.scaladsl.testkit.{ScalatestRouteTest, WSProbe}
-import akka.stream.scaladsl.Source
-import msocket.security.models.AccessToken
+import akka.http.scaladsl.testkit.ScalatestRouteTest
 import csw.aas.http.AuthorizationPolicy.RealmRolePolicy
 import csw.aas.http.SecurityDirectives
 import csw.location.api.models.ComponentType.Service
 import csw.location.api.models.Connection.HttpConnection
 import csw.location.api.models._
 import csw.prefix.models.Prefix
-import io.bullet.borer.Json
 import io.bullet.borer.compat.AkkaHttpCompat
+import msocket.security.models.AccessToken
 import org.mockito.MockitoSugar.{mock, reset, verify, when}
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
@@ -76,38 +72,4 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
   }
 
   val connection: Connection.HttpConnection = HttpConnection(ComponentId(Prefix(TestHelper.randomSubsystem, "$name;format="lower"$"), Service))
-
-  "get locations must check for Esw-admin role and delegate to service1.locations" in {
-    val httpLocation              = HttpLocation(connection, new URI(""), Metadata.empty)
-    val locations: List[Location] = List(httpLocation)
-    val policy                    = RealmRolePolicy("Esw-admin")
-    when(securityDirectives.sGet(policy)).thenReturn(accessTokenDirective)
-    when(service1.locations()).thenReturn(Future.successful(locations))
-
-    Get("/locations") ~> route ~> check {
-      verify(service1).locations()
-      verify(securityDirectives).sGet(policy)
-
-      responseAs[List[Location]] should ===(locations)
-    }
-  }
-
-  "delegate to websocket greeter" in {
-    val userInfo            = UserInfo("Peter", "Smith")
-    val $name;format="lower"$ResponseMsg = TestHelper.randomString(10)
-    val $name;format="lower"$Response    = $name;format="space,Camel"$Response($name;format="lower"$ResponseMsg)
-    when(service1.sayHelloStream(userInfo)).thenReturn(Source.single($name;format="lower"$Response))
-    val wsClient = WSProbe()
-
-    WS("/greeter", wsClient.flow) ~> route ~>
-      check {
-        isWebSocketUpgrade shouldEqual true
-
-        wsClient.sendMessage(Json.encode(userInfo).toUtf8String)
-        wsClient.expectMessage(Json.encode($name;format="lower"$Response).toUtf8String)
-
-        wsClient.sendCompletion()
-        wsClient.expectCompletion()
-      }
-  }
 }

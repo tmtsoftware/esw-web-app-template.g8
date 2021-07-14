@@ -5,19 +5,14 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.Uri.Path
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.model.headers.{Authorization, OAuth2BearerToken}
-import akka.http.scaladsl.model.ws.{Message, TextMessage, WebSocketRequest}
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.scaladsl.{Flow, Keep, Sink, Source}
 import csw.aas.core.commons.AASConnection
 import csw.location.api.models.Connection.HttpConnection
 import csw.location.api.models._
 import csw.location.api.scaladsl.LocationService
 import csw.network.utils.Networks
-import csw.prefix.models.Prefix
-import csw.prefix.models.Subsystem.{CSW, ESW}
 import csw.testkit.scaladsl.ScalaTestFrameworkTestKit
 import io.bullet.borer.Json
-import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpecLike
 import org.tmt.embedded_keycloak.KeycloakData.{ApplicationUser, Client, Realm}
@@ -86,7 +81,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
     }
 
     "should call securedSayHello and return $name;format="lower"$Response as a result" in {
-      val token  = getToken("admin", "password1")()
+      val token    = getToken("admin", "password1")()
       val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.POST,
@@ -103,21 +98,8 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
       )
     }
 
-    "should call locations and return 401 as a result without valid token" in {
-      val userInfo = UserInfo("John", "Smith")
-      val request = HttpRequest(
-        HttpMethods.GET,
-        uri = appUri.withPath(Path / "locations"),
-        headers = Nil
-      )
-
-      val response: HttpResponse = Http().singleRequest(request).futureValue
-
-      response.status should ===(StatusCode.int2StatusCode(401))
-    }
-
     "should call securedSayHello and return 403 as a result without required role" in {
-      val token  = getToken("nonAdmin", "password2")()
+      val token    = getToken("nonAdmin", "password2")()
       val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.POST,
@@ -130,57 +112,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
 
       response.status should ===(StatusCode.int2StatusCode(403))
     }
-
-    "should call locations and return Locations as a result" in {
-      val token     = getToken("admin", "password1")()
-      val aasPrefix = Prefix(CSW, "AAS")
-      val appPrefix = Prefix(ESW, "$name;format="lower"$")
-      val request = HttpRequest(
-        HttpMethods.GET,
-        uri = appUri.withPath(Path / "locations"),
-        headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil)
-      )
-
-      val response: HttpResponse = Http().singleRequest(request).futureValue
-
-      response.status should ===(StatusCode.int2StatusCode(200))
-      Unmarshal(response).to[List[Location]].futureValue.map(_.prefix) should ===(List(aasPrefix, appPrefix))
-    }
-
-    "should call greeter and return stream response as a result" in {
-      val userInfo    = UserInfo("John", "Smith")
-      val uri       = appLocation.uri
-      val wsRequest = WebSocketRequest(uri = s"ws://\${uri.getHost}:\${uri.getPort}/greeter")
-
-      val (connectionSink, connectionSource) =
-        Source.asSubscriber[Message].mapMaterializedValue(Sink.fromSubscriber).preMaterialize()
-
-      val requestSource = Source.single(TextMessage.Strict(encode(userInfo))).concat(Source.maybe) // adding userInfo request
-      val flow          = Flow.fromSinkAndSourceCoupled(connectionSink, requestSource)
-
-      Http().singleWebSocketRequest(wsRequest, flow) // send request
-
-      // collect responses
-      val (_, responsesF) = connectionSource
-        .take(3) // to limit the infinite source
-        .collect { case msg: TextMessage.Strict => decode$name;format="space,Camel"$Res(msg) }
-        .toMat(Sink.seq)(Keep.both)
-        .run()
-
-      // assert on response
-      val expectedRes = $name;format="space,Camel"$Response(s"Hello user: \${userInfo.firstname} \${userInfo.lastname}!!!")
-      eventually(Timeout(1600.millis)) { // 3 msg with 500 millis interval
-        val responses = responsesF.futureValue
-        responses.size shouldBe 3
-        responses should ===(Seq.fill(3)(expectedRes))
-      }
-
-    }
   }
-
-  private def encode(userInfo: UserInfo) = Json.encode(userInfo).toUtf8String
-
-  private def decode$name;format="space,Camel"$Res(msg: TextMessage.Strict) = Json.decode(msg.text.getBytes()).to[$name;format="space,Camel"$Response].value
 
   private def startAndRegisterKeycloak(port: Int): StopHandle = {
     val eswUserRole  = "Esw-user"
