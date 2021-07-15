@@ -17,7 +17,7 @@ import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import org.scalatest.wordspec.AnyWordSpec
 import org.tmt.$name;format="lower"$.TestHelper
 import org.tmt.$name;format="lower"$.core.$name;format="space,Camel"$Impl
-import org.tmt.$name;format="lower"$.core.models.{UserInfo, $name;format="space,Camel"$Response}
+import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 
 import scala.concurrent.Future
 import scala.util.Random
@@ -35,38 +35,38 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
   override protected def beforeEach(): Unit = reset(service1, securityDirectives)
 
   "$name;format="space,Camel"$Route" must {
-    "sayHello must delegate to service1.sayHello" in {
-      val response = $name;format="space,Camel"$Response(Random.nextString(10))
+    "greeting must delegate to service1.greeting" in {
+      val response = GreetResponse(Random.nextString(10))
       val john     = UserInfo("John", "Smith")
-      when(service1.sayHello(john)).thenReturn(Future.successful(response))
+      when(service1.greeting(john)).thenReturn(Future.successful(response))
 
-      Post("/sayHello", john) ~> route ~> check {
-        verify(service1).sayHello(UserInfo("John", "Smith"))
-        responseAs[$name;format="space,Camel"$Response] should ===(response)
+      Post("/greeting", john) ~> route ~> check {
+        verify(service1).greeting(UserInfo("John", "Smith"))
+        responseAs[GreetResponse] should ===(response)
       }
     }
 
     "sayBye must delegate to service2.sayBye" in {
-      val response = $name;format="space,Camel"$Response(Random.nextString(10))
+      val response = GreetResponse(Random.nextString(10))
       when(service2.sayBye()).thenReturn(Future.successful(response))
 
       Get("/sayBye") ~> route ~> check {
         verify(service2).sayBye()
-        responseAs[$name;format="space,Camel"$Response] should ===(response)
+        responseAs[GreetResponse] should ===(response)
       }
     }
 
-    "securedSayHello must check for Esw-user role and delegate to service1.securedSayHello" in {
-      val response = $name;format="space,Camel"$Response(Random.nextString(10))
+    "adminGreeting must check for Esw-user role and delegate to service1.adminGreeting" in {
+      val response = AdminGreetResponse(Random.nextString(10))
       val policy   = RealmRolePolicy("Esw-user")
       val john     = UserInfo("John", "Smith")
       when(securityDirectives.sPost(policy)).thenReturn(accessTokenDirective)
-      when(service1.securedSayHello(john)).thenReturn(Future.successful(Some(response)))
+      when(service1.adminGreeting(john)).thenReturn(Future.successful(response))
 
-      Post("/securedSayHello", john) ~> route ~> check {
-        verify(service1).securedSayHello(UserInfo("John", "Smith"))
+      Post("/adminGreeting", john) ~> route ~> check {
+        verify(service1).adminGreeting(UserInfo("John", "Smith"))
         verify(securityDirectives).sPost(policy)
-        responseAs[Option[$name;format="space,Camel"$Response]] should ===(Some(response))
+        responseAs[AdminGreetResponse] should ===(response)
       }
     }
   }

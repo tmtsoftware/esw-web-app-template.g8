@@ -7,7 +7,7 @@ import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.tmt.$name;format="lower"$.core.J$name;format="space,Camel"$Impl
-import org.tmt.$name;format="lower"$.core.models.$name;format="space,Camel"$Response
+import org.tmt.$name;format="lower"$.core.models.GreetResponse
 
 class J$name;format="space,Camel"$ImplWrapperTest extends AnyWordSpec with Matchers {
 
@@ -16,7 +16,7 @@ class J$name;format="space,Camel"$ImplWrapperTest extends AnyWordSpec with Match
       val j$name;format="space,Camel"$Impl       = mock[J$name;format="space,Camel"$Impl]
       val $name;format="lower"$ImplWrapper = new J$name;format="space,Camel"$ImplWrapper(j$name;format="space,Camel"$Impl)
 
-      val $name;format="lower"$Response = mock[$name;format="space,Camel"$Response]
+      val $name;format="lower"$Response = mock[GreetResponse]
       when(j$name;format="space,Camel"$Impl.sayBye()).thenReturn(CompletableFuture.completedFuture($name;format="lower"$Response))
 
       $name;format="lower"$ImplWrapper.sayBye().futureValue should ===($name;format="lower"$Response)
