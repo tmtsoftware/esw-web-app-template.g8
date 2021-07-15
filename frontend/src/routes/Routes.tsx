@@ -1,35 +1,33 @@
-import { CheckLogin } from '@tmtsoftware/esw-ts'
-import { Result } from 'antd'
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import LoginError from '../components/error/LoginError'
-import { GreetUser } from '../components/GreetUser'
-import Welcome from '../components/Welcome'
+import React, { useEffect } from 'react'
+import { Route, RouteProps, Switch } from 'react-router-dom'
+import { NotFound } from '../components/error/NotFound'
+import { AdminGreeting } from '../components/pages/AdminGreeting'
+import { Greeting } from '../components/pages/Greeting'
+import { Welcome } from '../components/pages/Welcome'
+import { useAuth } from '../hooks/useAuth'
 
 export const Routes = (): JSX.Element => {
   return (
     <Switch>
-      <Route exact path='/'>
-        <Welcome />
-      </Route>
-      <Route path='/greet'>
-        <GreetUser />
-      </Route>
-      <Route path='/securedGreet'>
-        <CheckLogin error={<LoginError />}>
-          <GreetUser isSecured />
-        </CheckLogin>
-      </Route>
-      <Route
-        path='*'
-        component={() => (
-          <Result
-            status='404'
-            title='404'
-            subTitle='Sorry, the page you visited does not exist.'
-          />
-        )}
-      />
+      <Route exact path='/' component={Welcome} />
+      <Route path='/greeting' component={Greeting} />
+      <ProtectedRoute path='/adminGreeting' component={AdminGreeting} />
+      <Route path='*' component={NotFound} />
     </Switch>
   )
+}
+
+const ProtectedRoute = (routeProps: RouteProps) => {
+  const { auth } = useAuth()
+  if (!auth) return <div>Loading</div>
+  const isAuthenticated = auth?.isAuthenticated() ?? false
+  return isAuthenticated ? <Route {...routeProps} /> : <RedirectToLogin />
+}
+
+const RedirectToLogin = () => {
+  const { login } = useAuth()
+
+  useEffect(login, [login])
+
+  return <div>Loading...</div>
 }
