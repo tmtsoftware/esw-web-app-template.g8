@@ -30,7 +30,7 @@ jobs:
             restore-keys: |
               ${{ runner.os }}-node-
 
-      - uses: laughedelic/coursier-setup@v1
+      - uses: coursier/setup-action@v1
         with:
           jvm: 11
           apps: sbt sbtn
