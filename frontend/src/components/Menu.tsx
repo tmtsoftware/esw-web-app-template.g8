@@ -10,7 +10,7 @@ export const Login = ({ login }: { login: () => void }): JSX.Element => (
 )
 
 export const Logout = ({ logout }: { logout: () => void }): JSX.Element => (
-  <Menu.Item key='login' onClick={logout}>
+  <Menu.Item key='logout' onClick={logout}>
     Logout
   </Menu.Item>
 )
