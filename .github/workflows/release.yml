@@ -3,28 +3,43 @@ name: release
 on:
   push:
     tags:
-      - "v*"
-    branches: [ master ]
+      - 'v*'
+    branches: [master]
 
 jobs:
   g8:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: olafurpg/setup-scala@v10
-        with:
-          java-version: adopt@1.11
+      - uses: actions/checkout@v2
+      # https://www.pika.dev/npm/snowpack/discuss/444
+      # following step is needed because snowpack is watching files from node_modules as well
+      - name: increase file watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-      - name: Install CS native
-        run: |
-          curl -fLo cs https://git.io/coursier-cli-linux
-          chmod +x cs
-          sudo mv cs /usr/local/bin
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Cache ~/.npm
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - uses: coursier/setup-action@v1
+        with:
+          jvm: 11
+          apps: sbt sbtn
+      - uses: coursier/cache-action@v5
 
       - name: Install giter8
         run: |
           cs install giter8
-          sudo mv /home/runner/.local/share/coursier/bin/g8 /usr/local/bin
+          sudo mv /home/runner/cs/bin/g8 /usr/local/bin
           cd /usr/local/bin
           chmod +x g8
 
@@ -44,11 +59,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-
 
-      - name: Giter8 Compile
+      - name: create new project from esw-web-app-template.g8 template
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 --name=appserver
-          cd appserver
-          sbt clean test
+          g8 tmtsoftware/esw-web-app-template.g8 --name=sample
+
+      - name: Build - backend app
+        working-directory: ./sample/backend
+        run: |
+          sbtn clean 
+          sbtn test
+
+      - name: Build - frontend app
+        working-directory: ./sample/frontend
+        run: |
+          npm install
+          npm run build
+          npm run test
 
       - name: Notify slack
         if: always()
