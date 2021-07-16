@@ -86,10 +86,6 @@ jobs:
         if: github.event_name == 'schedule'
         run: echo "BRANCH_NAME=dev" >> $GITHUB_ENV
 
-      - name: Set branch name (trigger - Schedule)
-        if: github.event_name == 'schedule'
-        run: echo "BRANCH_NAME=dev" >> $GITHUB_ENV
-
       - name: create new project from web-app-template.g8 template
         run: |
           echo "Running build for branch ${BRANCH_NAME}"
