@@ -59,9 +59,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-
 
-      - name: create new project from web-app-template.g8 template
+      - name: create new project from esw-web-app-template.g8 template
         run: |
-          g8 tmtsoftware/web-app-template.g8 --name=sample
+          g8 tmtsoftware/esw-web-app-template.g8 --name=sample
 
       - name: Build - backend app
         working-directory: ./sample/backend

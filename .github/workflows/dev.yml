@@ -86,10 +86,10 @@ jobs:
         if: github.event_name == 'schedule'
         run: echo "BRANCH_NAME=dev" >> $GITHUB_ENV
 
-      - name: create new project from web-app-template.g8 template
+      - name: create new project from esw-web-app-template.g8 template
         run: |
           echo "Running build for branch ${BRANCH_NAME}"
-          g8 tmtsoftware/web-app-template.g8 --name=sample --branch ${BRANCH_NAME}
+          g8 tmtsoftware/esw-web-app-template.g8 --name=sample --branch ${BRANCH_NAME}
 
       - name: Build - backend app
         working-directory: ./sample/backend

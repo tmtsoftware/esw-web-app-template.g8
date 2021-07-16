@@ -26,7 +26,7 @@ Steps for installing coursier are documented [here](https://tmtsoftware.github.i
 
 ### Create new project using giter8 template
 
-`g8 tmtsoftware/web-app-template.g8`
+`g8 tmtsoftware/esw-web-app-template.g8`
 
 This template will prompt for the following parameters. Press Enter to accept the default values, shown in brackets:
 

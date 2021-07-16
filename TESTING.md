@@ -4,7 +4,7 @@ To test latest `esw-backend-template`:
 
 1. Take latest pull of `esw` repository
 2. In `esw` repository, run `sbt publishLocal`
-3. Generate project using command `g8 tmtsoftware/web-app-template.g8 --branch dev`
+3. Generate project using command `g8 tmtsoftware/esw-web-app-template.g8 --branch dev`
 
 ## Backend Project
 
