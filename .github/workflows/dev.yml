@@ -2,12 +2,12 @@ name: dev CI
 
 on:
   push:
-    branches: [ dev ]
+    branches: [dev]
   pull_request:
-    branches: [ dev, master ]
+    branches: [dev, master]
 
   schedule:
-    - cron: "30 18 * * *" # run at 00:00 AM IST
+    - cron: '30 18 * * *' # run at 00:00 AM IST
 
 jobs:
   g8:
@@ -22,16 +22,16 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-            node-version: "15.x"
-            registry-url: "https://registry.npmjs.org"
+          node-version: '15.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Cache ~/.npm
         uses: actions/cache@v1
         with:
-            path: ~/.npm
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-node-
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Checkout ESW repo
         uses: actions/checkout@v2
@@ -69,8 +69,8 @@ jobs:
 
       - name: Publish Local checked out ESW repo
         run: |
-            sbtn clean 
-            sbtn publishLocal
+          sbtn clean 
+          sbtn publishLocal
 
       - name: Extract branch name (Trigger - PR)
         if: github.event_name == 'pull_request'
@@ -81,15 +81,15 @@ jobs:
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
         id: extract_branch
- 
+
       - name: Set branch name (trigger - Schedule)
         if: github.event_name == 'schedule'
         run: echo "BRANCH_NAME=dev" >> $GITHUB_ENV
 
-      - name: create new project from esw-backend-template.g8 template
+      - name: create new project from web-app-template.g8 template
         run: |
           echo "Running build for branch ${BRANCH_NAME}"
-          g8 tmtsoftware/esw-backend-template.g8 --name=sample --branch ${BRANCH_NAME}
+          g8 tmtsoftware/web-app-template.g8 --name=sample --branch ${BRANCH_NAME}
 
       - name: Build - backend app
         working-directory: ./sample/backend
@@ -100,9 +100,9 @@ jobs:
       - name: Build - frontend app
         working-directory: ./sample/frontend
         run: |
-            npm install
-            npm run build
-            npm run test          
+          npm install
+          npm run build
+          npm run test
 
       - name: Notify slack
         if: always()

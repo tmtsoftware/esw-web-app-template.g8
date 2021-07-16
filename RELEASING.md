@@ -14,4 +14,4 @@ Steps to release:
 10. Run ./release.sh `VERSION` script by providing version number argument
     **Note:** `PROD=true` environment variable needs to be set before running `release.sh`
 11. After release is complete, change the `esw` version back to `0.1.0-SNAPSHOT` in `project/Libs.scala` in dev branch
-12. Tagging esw-backend-template.g8 will trigger `release` workflow in github actions tab. Make sure that `release` workflow is green
+12. Tagging web-app-template.g8 will trigger `release` workflow in github actions tab. Make sure that `release` workflow is green

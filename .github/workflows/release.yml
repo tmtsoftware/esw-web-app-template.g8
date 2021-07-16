@@ -3,8 +3,8 @@ name: release
 on:
   push:
     tags:
-      - "v*"
-    branches: [ master ]
+      - 'v*'
+    branches: [master]
 
 jobs:
   g8:
@@ -19,16 +19,16 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-            node-version: "14.x"
-            registry-url: "https://registry.npmjs.org"
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Cache ~/.npm
         uses: actions/cache@v1
         with:
-            path: ~/.npm
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-node-
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - uses: coursier/setup-action@v1
         with:
@@ -41,7 +41,7 @@ jobs:
           cs install giter8
           sudo mv /home/runner/cs/bin/g8 /usr/local/bin
           cd /usr/local/bin
-          chmod +x g8          
+          chmod +x g8
 
       - name: Cache ~/.cache
         uses: actions/cache@v1
@@ -59,9 +59,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sbt-
 
-      - name: create new project from esw-backend-template.g8 template
+      - name: create new project from web-app-template.g8 template
         run: |
-          g8 tmtsoftware/esw-backend-template.g8 --name=sample
+          g8 tmtsoftware/web-app-template.g8 --name=sample
 
       - name: Build - backend app
         working-directory: ./sample/backend
@@ -72,9 +72,9 @@ jobs:
       - name: Build - frontend app
         working-directory: ./sample/frontend
         run: |
-            npm install
-            npm run build
-            npm run test            
+          npm install
+          npm run build
+          npm run test
 
       - name: Notify slack
         if: always()
