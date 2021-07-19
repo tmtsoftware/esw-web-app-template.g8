@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLocationService } from '../../contexts/LocationServiceContext'
 import { useAuth } from '../../hooks/useAuth'
-import type { UserInfoRequest } from '../../models/Models'
+import type { UserInfo } from '../../models/Models'
 import { fetchAdminGreeting } from '../../utils/api'
 import { errorMessage } from '../../utils/message'
 import { getBackendUrl } from '../../utils/resolveBackend'
@@ -15,7 +15,7 @@ export const AdminGreeting = (): JSX.Element => {
 
   const locationService = useLocationService()
 
-  const onFinish = async (values: UserInfoRequest) => {
+  const onFinish = async (values: UserInfo) => {
     const backendUrl = await getBackendUrl(locationService)
 
     if (backendUrl) {

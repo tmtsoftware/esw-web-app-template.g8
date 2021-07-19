@@ -1,7 +1,6 @@
-import { Typography } from 'antd'
 import React, { useState } from 'react'
 import { useLocationService } from '../../contexts/LocationServiceContext'
-import type { UserInfoRequest } from '../../models/Models'
+import type { UserInfo } from '../../models/Models'
 import { fetchGreeting } from '../../utils/api'
 import { getBackendUrl } from '../../utils/resolveBackend'
 import { UserForm } from '../form/UserForm'
@@ -12,7 +11,7 @@ export const Greeting = (): JSX.Element => {
 
   const locationService = useLocationService()
 
-  const onFinish = async (values: UserInfoRequest) => {
+  const onFinish = async (values: UserInfo) => {
     const backendUrl = await getBackendUrl(locationService)
 
     if (backendUrl) {

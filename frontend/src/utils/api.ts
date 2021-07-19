@@ -1,7 +1,7 @@
 import type {
   AdminGreetResponse,
   GreetResponse,
-  UserInfoRequest
+  UserInfo
 } from '../models/Models'
 import { post } from './Http'
 
@@ -15,18 +15,18 @@ const adminGreetingUrl = (baseUrl: string) => baseUrl + 'adminGreeting'
 
 export const fetchGreeting = async (
   baseUrl: string,
-  userInfo: UserInfoRequest
+  userInfo: UserInfo
 ): Promise<GreetResponse | undefined> =>
-  (await post<UserInfoRequest, GreetResponse>(greetingUrl(baseUrl), userInfo))
+  (await post<UserInfo, GreetResponse>(greetingUrl(baseUrl), userInfo))
     .parsedBody
 
 export const fetchAdminGreeting = async (
   baseUrl: string,
-  userInfo: UserInfoRequest,
+  userInfo: UserInfo,
   token: string
 ): Promise<AdminGreetResponse | undefined> =>
   (
-    await post<UserInfoRequest, AdminGreetResponse>(
+    await post<UserInfo, AdminGreetResponse>(
       adminGreetingUrl(baseUrl),
       userInfo,
       {

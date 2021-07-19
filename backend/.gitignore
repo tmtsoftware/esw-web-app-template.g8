@@ -39,6 +39,7 @@ snapshots
 .bloop
 project/.bloop
 project/project/.bloop
+.bsp
 
 .metals
 .gradle

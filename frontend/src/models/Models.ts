@@ -1,6 +1,6 @@
-export interface UserInfoRequest {
-  firstname: string
-  lastname: string
+export interface UserInfo {
+  firstName: string
+  lastName: string
 }
 export interface GreetResponse {
   greeting: string

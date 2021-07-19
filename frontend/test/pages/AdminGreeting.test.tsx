@@ -25,13 +25,13 @@ describe('AdminGreeting', () => {
   )
 
   it('should render admin Input form and display message on submit', async () => {
-    const firstname = 'Test'
-    const lastname = 'User'
+    const firstName = 'John'
+    const lastName = 'Smith'
     const userInfo = {
-      firstname,
-      lastname
+      firstName,
+      lastName
     }
-    const greeting = `Hello admin user: \${firstname} \${lastname}!!!`
+    const greeting = `Hello admin user: \${firstName} \${lastName}!!!`
     const response = new Response(JSON.stringify({ greeting }))
     const fetch = mockFetch()
 
@@ -46,8 +46,8 @@ describe('AdminGreeting', () => {
       'LastName'
     )) as HTMLInputElement
 
-    userEvent.type(firstNameInput, firstname)
-    userEvent.type(lastNameInput, lastname)
+    userEvent.type(firstNameInput, firstName)
+    userEvent.type(lastNameInput, lastName)
 
     const submitButton = (await screen.findByRole(
       'Submit'

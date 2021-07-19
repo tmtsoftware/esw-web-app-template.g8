@@ -30,7 +30,7 @@ export const MenuBar = (): JSX.Element => {
       {isAuthenticated ? (
         <>
           <Menu.Item key='adminGreeting'>
-            <Link to='/adminGreeting'>Admin Greeting</Link>
+            <Link to='/adminGreeting'>AdminGreeting</Link>
           </Menu.Item>
           <Logout logout={logout} />
         </>

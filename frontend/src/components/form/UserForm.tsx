@@ -1,13 +1,13 @@
 import { Button, Form, Input, Layout, Typography } from 'antd'
 import { Content } from 'antd/lib/layout/layout'
 import React from 'react'
-import type { UserInfoRequest } from '../../models/Models'
+import type { UserInfo } from '../../models/Models'
 import styles from './UserForm.module.css'
 
 export const UserForm = ({
   onFinish
 }: {
-  onFinish: (values: UserInfoRequest) => Promise<void>
+  onFinish: (values: UserInfo) => Promise<void>
 }): JSX.Element => {
   const layout = {
     labelCol: { span: 8 },
@@ -27,18 +27,18 @@ export const UserForm = ({
           </Form.Item>
           <Form.Item
             label='FirstName'
-            name='firstname'
+            name='firstName'
             rules={[
-              { required: true, message: 'Please enter your firstname!' }
+              { required: true, message: 'Please enter your firstName!' }
             ]}>
             <Input role='FirstName' />
           </Form.Item>
 
           <Form.Item
             label='LastName'
-            name='lastname'
+            name='lastName'
             rules={[
-              { required: true, message: 'Please enter your lastname!' }
+              { required: true, message: 'Please enter your lastName!' }
             ]}>
             <Input role='LastName' />
           </Form.Item>

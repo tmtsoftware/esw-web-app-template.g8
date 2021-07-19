@@ -77,7 +77,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
 
       val response: HttpResponse = Http().singleRequest(request).futureValue
       response.status should ===(StatusCode.int2StatusCode(200))
-      Unmarshal(response).to[GreetResponse].futureValue should ===(GreetResponse(s"Hello user: \${userInfo.firstname} \${userInfo.lastname}!!!"))
+      Unmarshal(response).to[GreetResponse].futureValue should ===(GreetResponse(s"Hello user: \${userInfo.firstName} \${userInfo.lastName}!!!"))
     }
 
     "should call adminGreeting and return AdminGreetResponse as a result" in {
@@ -94,7 +94,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
 
       response.status should ===(StatusCode.int2StatusCode(200))
       Unmarshal(response).to[AdminGreetResponse].futureValue should ===(
-        AdminGreetResponse(s"Hello admin user: \${userInfo.firstname} \${userInfo.lastname}!!!")
+        AdminGreetResponse(s"Hello admin user: \${userInfo.firstName} \${userInfo.lastName}!!!")
       )
     }
 
