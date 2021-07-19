@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useUsername } from '../../hooks/useAuth'
-import { displayGreeting } from './Greeting'
 
 export const Welcome = (): JSX.Element => {
   const [username, setUsername] = useState<string | undefined>(undefined)
@@ -10,5 +9,9 @@ export const Welcome = (): JSX.Element => {
     setUsername(user)
   }, [user])
 
-  return <>{displayGreeting(`Welcome \${username ? username : 'Guest'} !!!`)}</>
+  return <>{displayMessage(`Welcome \${username ? username : 'Guest'} !!!`)}</>
 }
+
+export const displayMessage = (greeting: string): JSX.Element => (
+  <Typography.Title level={3}>{greeting}</Typography.Title>
+)

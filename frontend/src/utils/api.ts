@@ -26,7 +26,7 @@ export const fetchAdminGreeting = async (
   token: string
 ): Promise<AdminGreetResponse | undefined> =>
   (
-    await post<UserInfoRequest, GreetResponse>(
+    await post<UserInfoRequest, AdminGreetResponse>(
       adminGreetingUrl(baseUrl),
       userInfo,
       {

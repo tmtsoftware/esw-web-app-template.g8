@@ -5,6 +5,7 @@ import type { UserInfoRequest } from '../../models/Models'
 import { fetchGreeting } from '../../utils/api'
 import { getBackendUrl } from '../../utils/resolveBackend'
 import { UserForm } from '../form/UserForm'
+import { displayMessage } from './Welcome'
 
 export const Greeting = (): JSX.Element => {
   const [greeting, setGreeting] = useState<string>()
@@ -27,11 +28,7 @@ export const Greeting = (): JSX.Element => {
   return (
     <>
       <UserForm onFinish={onFinish} />
-      {greeting && displayGreeting(greeting)}
+      {greeting && displayMessage(greeting)}
     </>
   )
 }
-
-export const displayGreeting = (greeting: string): JSX.Element => (
-  <Typography.Title level={3}>{greeting}</Typography.Title>
-)

@@ -6,7 +6,7 @@ import { fetchAdminGreeting } from '../../utils/api'
 import { errorMessage } from '../../utils/message'
 import { getBackendUrl } from '../../utils/resolveBackend'
 import { UserForm } from '../form/UserForm'
-import { displayGreeting } from './Greeting'
+import { displayMessage } from './Welcome'
 
 export const AdminGreeting = (): JSX.Element => {
   const { auth } = useAuth()
@@ -36,7 +36,7 @@ export const AdminGreeting = (): JSX.Element => {
   return (
     <>
       <UserForm onFinish={onFinish} />
-      {greeting && displayGreeting(greeting)}
+      {greeting && displayMessage(greeting)}
     </>
   )
 }
