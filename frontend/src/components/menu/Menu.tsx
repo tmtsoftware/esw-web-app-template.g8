@@ -1,19 +1,10 @@
 import { Menu } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
+import { Login } from './Login'
+import { Logout } from './Logout'
 
-export const Login = ({ login }: { login: () => void }): JSX.Element => (
-  <Menu.Item key='login' onClick={login}>
-    Login
-  </Menu.Item>
-)
-
-export const Logout = ({ logout }: { logout: () => void }): JSX.Element => (
-  <Menu.Item key='logout' onClick={logout}>
-    Logout
-  </Menu.Item>
-)
 
 export const MenuBar = (): JSX.Element => {
   const { auth, login, logout } = useAuth()

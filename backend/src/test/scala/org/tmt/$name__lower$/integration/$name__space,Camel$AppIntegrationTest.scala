@@ -66,12 +66,10 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
     }
 
     "should call greeting and return GreetResponse as a result" in {
-      val token    = getToken("admin", "password1")()
       val userInfo = UserInfo("John", "Smith")
       val request = HttpRequest(
         HttpMethods.POST,
         uri = appUri.withPath(Path / "greeting"),
-        headers = token.map(x => Seq(Authorization(OAuth2BearerToken(x)))).getOrElse(Nil),
         entity = HttpEntity(ContentTypes.`application/json`, Json.encode(userInfo).toUtf8String.getBytes)
       )
 

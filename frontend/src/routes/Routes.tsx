@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import { Route, RouteProps, Switch } from 'react-router-dom'
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import { NotFound } from '../components/error/NotFound'
 import { AdminGreeting } from '../components/pages/AdminGreeting'
 import { Greeting } from '../components/pages/Greeting'
 import { Welcome } from '../components/pages/Welcome'
-import { useAuth } from '../hooks/useAuth'
+import { ProtectedRoute } from './ProtectedRoute'
 
 export const Routes = (): JSX.Element => {
   return (
@@ -17,17 +17,3 @@ export const Routes = (): JSX.Element => {
   )
 }
 
-const ProtectedRoute = (routeProps: RouteProps) => {
-  const { auth } = useAuth()
-  if (!auth) return <div>Loading</div>
-  const isAuthenticated = auth?.isAuthenticated() ?? false
-  return isAuthenticated ? <Route {...routeProps} /> : <RedirectToLogin />
-}
-
-const RedirectToLogin = () => {
-  const { login } = useAuth()
-
-  useEffect(login, [login])
-
-  return <div>Loading...</div>
-}
