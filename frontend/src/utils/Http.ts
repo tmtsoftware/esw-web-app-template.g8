@@ -8,17 +8,18 @@ const http = async <Res>(
 ): Promise<HttpResponse<Res>> => {
   const response: HttpResponse<Res> = await fetch(request, init)
 
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch data, status code = \${response.status} , reason = \${response.statusText}`
+    )
+  }
+
   try {
     response.parsedBody = await response.json()
   } catch (ex) {
     throw new Error(`Failed to parse response, reason: \${ex} `)
   }
 
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch data, status code = \${response.status} , reason = \${response.statusText}`
-    )
-  }
   return response
 }
 
