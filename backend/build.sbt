@@ -9,6 +9,7 @@ lazy val `backend` = project
       )
     ),
     name := "backend",
+    fork := true,
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(
       Libs.`esw-http-template-wiring` % "compile->compile;test->test",
