@@ -1,6 +1,6 @@
 package org.tmt.$name;format="lower"$.http
 
-import org.tmt.$name;format="lower"$.core.J$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower"$.impl.J$name;format="space,Camel"$Impl
 import org.tmt.$name;format="lower"$.core.models.GreetResponse
 
 import scala.compat.java8.FutureConverters.CompletionStageOps

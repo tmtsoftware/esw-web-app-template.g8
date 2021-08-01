@@ -6,7 +6,7 @@ import org.mockito.MockitoSugar.{mock, verify, when}
 import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import org.tmt.$name;format="lower"$.core.J$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower"$.impl.J$name;format="space,Camel"$Impl
 import org.tmt.$name;format="lower"$.core.models.GreetResponse
 
 class J$name;format="space,Camel"$ImplWrapperTest extends AnyWordSpec with Matchers {

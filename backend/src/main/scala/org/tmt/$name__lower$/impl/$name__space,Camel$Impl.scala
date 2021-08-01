@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$.core
+package org.tmt.$name;format="lower"$.impl
 
 import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 

@@ -2,7 +2,7 @@ package org.tmt.$name;format="lower"$
 
 import akka.http.scaladsl.server.Route
 import esw.http.template.wiring.ServerWiring
-import org.tmt.$name;format="lower"$.core.{J$name;format="space,Camel"$Impl, $name;format="space,Camel"$Impl}
+import org.tmt.$name;format="lower"$.impl.{J$name;format="space,Camel"$Impl, $name;format="space,Camel"$Impl}
 import org.tmt.$name;format="lower"$.http.{J$name;format="space,Camel"$ImplWrapper, $name;format="space,Camel"$Route}
 
 class $name;format="space,Camel"$Wiring(val port: Option[Int]) extends ServerWiring {

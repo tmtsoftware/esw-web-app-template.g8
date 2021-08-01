@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$.core;
+package org.tmt.$name;format="lower"$.impl;
 
 import esw.http.template.wiring.JCswServices;
 import org.hamcrest.CoreMatchers;

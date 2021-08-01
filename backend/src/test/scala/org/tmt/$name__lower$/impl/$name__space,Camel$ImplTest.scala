@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$.core
+package org.tmt.$name;format="lower"$.impl
 
 import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
 import org.scalatest.matchers.should.Matchers

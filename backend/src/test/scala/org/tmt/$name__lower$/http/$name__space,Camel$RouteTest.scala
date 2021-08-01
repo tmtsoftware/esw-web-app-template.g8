@@ -16,7 +16,7 @@ import org.scalatest.BeforeAndAfterEach
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import org.scalatest.wordspec.AnyWordSpec
 import org.tmt.$name;format="lower"$.TestHelper
-import org.tmt.$name;format="lower"$.core.$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower"$.impl.$name;format="space,Camel"$Impl
 import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 
 import scala.concurrent.Future

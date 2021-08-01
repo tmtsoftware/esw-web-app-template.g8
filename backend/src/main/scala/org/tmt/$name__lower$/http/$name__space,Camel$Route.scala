@@ -4,7 +4,7 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import csw.aas.http.AuthorizationPolicy.RealmRolePolicy
 import csw.aas.http.SecurityDirectives
-import org.tmt.$name;format="lower"$.core.$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower"$.impl.$name;format="space,Camel"$Impl
 import org.tmt.$name;format="lower"$.core.models.UserInfo
 
 import scala.concurrent.ExecutionContext
