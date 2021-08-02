@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$.http
+package org.tmt.$name;format="lower,word"$.http
 
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.BasicDirectives
@@ -15,9 +15,9 @@ import org.mockito.MockitoSugar.{mock, reset, verify, when}
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import org.scalatest.wordspec.AnyWordSpec
-import org.tmt.$name;format="lower"$.TestHelper
-import org.tmt.$name;format="lower"$.impl.$name;format="space,Camel"$Impl
-import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
+import org.tmt.$name;format="lower,word"$.TestHelper
+import org.tmt.$name;format="lower,word"$.impl.$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 
 import scala.concurrent.Future
 import scala.util.Random
@@ -71,5 +71,5 @@ class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRou
     }
   }
 
-  val connection: Connection.HttpConnection = HttpConnection(ComponentId(Prefix(TestHelper.randomSubsystem, "$name;format="lower"$"), Service))
+  val connection: Connection.HttpConnection = HttpConnection(ComponentId(Prefix(TestHelper.randomSubsystem, "$name;format="lower,word"$"), Service))
 }

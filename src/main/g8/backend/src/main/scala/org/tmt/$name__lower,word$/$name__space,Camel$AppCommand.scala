@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$
+package org.tmt.$name;format="lower,word"$
 
 import caseapp.{CommandName, ExtraName, HelpMessage}
 

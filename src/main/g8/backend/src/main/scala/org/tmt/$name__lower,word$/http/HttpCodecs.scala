@@ -1,10 +1,10 @@
-package org.tmt.$name;format="lower"$.http
+package org.tmt.$name;format="lower,word"$.http
 
 import csw.location.api.codec.LocationCodecs
 import io.bullet.borer.Codec
 import io.bullet.borer.compat.AkkaHttpCompat
 import io.bullet.borer.derivation.MapBasedCodecs.deriveCodec
-import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
+import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 
 // #for-docs-snippet
 object HttpCodecs extends HttpCodecs

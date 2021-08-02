@@ -12,7 +12,7 @@ import {
 } from '../utils/test-utils'
 
 describe('AdminGreeting', () => {
-  const connection = HttpConnection(Prefix.fromString('ESW.sample'), 'Service')
+  const connection = HttpConnection(Prefix.fromString('$prefix$'), 'Service')
 
   const httpLocation: HttpLocation = {
     _type: 'HttpLocation',

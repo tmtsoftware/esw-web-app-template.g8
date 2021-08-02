@@ -1,7 +1,7 @@
-package org.tmt.$name;format="lower"$.impl;
+package org.tmt.$name;format="lower,word"$.impl;
 
 import esw.http.template.wiring.JCswServices;
-import org.tmt.$name;format="lower"$.core.models.GreetResponse;
+import org.tmt.$name;format="lower,word"$.core.models.GreetResponse;
 
 import java.util.concurrent.CompletableFuture;
 

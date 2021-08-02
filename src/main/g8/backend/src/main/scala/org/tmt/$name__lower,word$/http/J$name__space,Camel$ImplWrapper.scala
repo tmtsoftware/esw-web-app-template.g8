@@ -1,7 +1,7 @@
-package org.tmt.$name;format="lower"$.http
+package org.tmt.$name;format="lower,word"$.http
 
-import org.tmt.$name;format="lower"$.impl.J$name;format="space,Camel"$Impl
-import org.tmt.$name;format="lower"$.core.models.GreetResponse
+import org.tmt.$name;format="lower,word"$.impl.J$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower,word"$.core.models.GreetResponse
 
 import scala.compat.java8.FutureConverters.CompletionStageOps
 import scala.concurrent.Future

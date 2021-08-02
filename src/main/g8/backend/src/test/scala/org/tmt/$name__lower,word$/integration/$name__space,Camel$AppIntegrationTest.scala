@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$.integration
+package org.tmt.$name;format="lower,word"$.integration
 
 import akka.actor.typed.{ActorSystem, SpawnProtocol}
 import akka.http.scaladsl.Http
@@ -19,9 +19,9 @@ import org.tmt.embedded_keycloak.KeycloakData.{ApplicationUser, Client, Realm}
 import org.tmt.embedded_keycloak.impl.StopHandle
 import org.tmt.embedded_keycloak.utils.BearerToken
 import org.tmt.embedded_keycloak.{EmbeddedKeycloak, KeycloakData, Settings}
-import org.tmt.$name;format="lower"$.$name;format="space,Camel"$Wiring
-import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
-import org.tmt.$name;format="lower"$.http.HttpCodecs
+import org.tmt.$name;format="lower,word"$.$name;format="space,Camel"$Wiring
+import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
+import org.tmt.$name;format="lower,word"$.http.HttpCodecs
 
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, ExecutionContext}
@@ -35,9 +35,9 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
   val locationService: LocationService = frameworkTestKit.frameworkWiring.locationService
   val hostname: String                 = Networks().hostname
   val keycloakPort                     = 8081
-  val $name;format="lower"$AppPort                    = 8085
-  val $name;format="lower"$Wiring                     = new $name;format="space,Camel"$Wiring(Some($name;format="lower"$AppPort))
-  val appConnection: HttpConnection    = $name;format="lower"$Wiring.settings.httpConnection
+  val $name;format="space,camel"$AppPort                    = 8085
+  val $name;format="space,camel"$Wiring                     = new $name;format="space,Camel"$Wiring(Some($name;format="space,camel"$AppPort))
+  val appConnection: HttpConnection    = $name;format="space,camel"$Wiring.settings.httpConnection
 
   var appLocation: HttpLocation  = _
   var appUri: Uri                = _
@@ -46,7 +46,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
   protected override def beforeAll(): Unit = {
     super.beforeAll()
     keycloakHandle = startAndRegisterKeycloak(keycloakPort)
-    $name;format="lower"$Wiring.start(Metadata.empty).futureValue
+    $name;format="space,camel"$Wiring.start(Metadata.empty).futureValue
     appLocation = locationService.resolve(appConnection, 5.seconds).futureValue.get
     appUri = Uri(appLocation.uri.toString)
   }
@@ -54,7 +54,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
   protected override def afterAll(): Unit = {
     keycloakHandle.stop()
     locationService.unregister(AASConnection.value)
-    $name;format="lower"$Wiring.stop().futureValue
+    $name;format="space,camel"$Wiring.stop().futureValue
     super.afterAll()
   }
 

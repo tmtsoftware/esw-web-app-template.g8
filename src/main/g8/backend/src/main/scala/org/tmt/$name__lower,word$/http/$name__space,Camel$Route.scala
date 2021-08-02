@@ -1,11 +1,11 @@
-package org.tmt.$name;format="lower"$.http
+package org.tmt.$name;format="lower,word"$.http
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import csw.aas.http.AuthorizationPolicy.RealmRolePolicy
 import csw.aas.http.SecurityDirectives
-import org.tmt.$name;format="lower"$.impl.$name;format="space,Camel"$Impl
-import org.tmt.$name;format="lower"$.core.models.UserInfo
+import org.tmt.$name;format="lower,word"$.impl.$name;format="space,Camel"$Impl
+import org.tmt.$name;format="lower,word"$.core.models.UserInfo
 
 import scala.concurrent.ExecutionContext
 

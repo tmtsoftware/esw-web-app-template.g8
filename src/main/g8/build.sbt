@@ -29,7 +29,7 @@ lazy val openSite =
 
 
 /* ================= Root Project ============== */
-lazy val `$name$` = project
+lazy val `$name;format="norm"$` = project
   .in(file("."))
   .enablePlugins(GithubPublishPlugin)
   .aggregate(docs)

@@ -1,6 +1,6 @@
-package org.tmt.$name;format="lower"$.impl
+package org.tmt.$name;format="lower,word"$.impl
 
-import org.tmt.$name;format="lower"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
+import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 
 import scala.concurrent.Future
 

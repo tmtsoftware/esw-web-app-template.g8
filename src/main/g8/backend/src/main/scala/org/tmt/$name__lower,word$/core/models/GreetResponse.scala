@@ -1,4 +1,4 @@
-package org.tmt.$name;format="lower"$.core.models
+package org.tmt.$name;format="lower,word"$.core.models
 
 case class GreetResponse(greeting: String)
 object GreetResponse {
