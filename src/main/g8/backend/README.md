@@ -102,4 +102,4 @@ or option for command can be added like so:
 ```
 * The newly added command/options need to handled in $name;format="Camel"$App
 
-* Any new application specific configuration can be added in [application.conf](./src/main/resources/application.conf)
+* Any new application specific configuration can be added in [application.conf](src/main/resources/application.conf)

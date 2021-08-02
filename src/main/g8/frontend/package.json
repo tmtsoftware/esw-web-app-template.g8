@@ -20,7 +20,7 @@
     "test": "web-test-runner 'test/**/*.test.{ts,tsx}'",
     "fix": "npm-run-all --parallel clean fix:eslint fix:prettier",
     "fix:eslint": "eslint --fix --config .eslintrc.json './**/*.{ts,tsx}'",
-    "fix:prettier": "prettier --write --config ./.prettierrc './**/*.{ts,tsx}' "
+    "fix:prettier": "prettier --write --config .prettierrc './**/*.{ts,tsx}' "
   },
   "browserslist": [
     "last 1 chrome version"

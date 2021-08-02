@@ -27,3 +27,4 @@ class $name;format="space,Camel"$Route(service1: $name;format="space,Camel"$Impl
       complete(service2.sayBye())
     }
 }
+
