@@ -5,6 +5,7 @@ import csw.location.api.models.Metadata
 import csw.network.utils.SocketUtils
 import esw.http.template.wiring.ServerApp
 import $name;format="space,Camel"$AppCommand.StartCommand
+import org.tmt.$name;format="lower,word"$.impl.$name;format="space,Camel"$Wiring
 
 object $name;format="space,Camel"$App extends ServerApp[$name;format="space,Camel"$AppCommand] {
   override def appName: String    = getClass.getSimpleName.dropRight(1)

@@ -19,7 +19,7 @@ import org.tmt.embedded_keycloak.KeycloakData.{ApplicationUser, Client, Realm}
 import org.tmt.embedded_keycloak.impl.StopHandle
 import org.tmt.embedded_keycloak.utils.BearerToken
 import org.tmt.embedded_keycloak.{EmbeddedKeycloak, KeycloakData, Settings}
-import org.tmt.$name;format="lower,word"$.$name;format="space,Camel"$Wiring
+import org.tmt.$name;format="lower,word"$.impl.$name;format="space,Camel"$Wiring
 import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 import org.tmt.$name;format="lower,word"$.http.HttpCodecs
 
