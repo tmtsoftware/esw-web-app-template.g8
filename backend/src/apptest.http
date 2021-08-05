@@ -1,8 +1,0 @@
-#### Request to test greeting endpoint
-POST http://<host>:8084/greeting
-Content-Type: application/json
-
-{
-"firstname":"Test",
-"lastname":"User"
-}
