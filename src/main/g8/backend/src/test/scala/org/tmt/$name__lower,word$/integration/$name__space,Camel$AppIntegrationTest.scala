@@ -32,7 +32,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
   implicit val ec: ExecutionContext                            = actorSystem.executionContext
   override implicit val patienceConfig: PatienceConfig         = PatienceConfig(10.seconds)
 
-  val locationService: LocationService = frameworkTestKit.frameworkWiring.locationService
+  val locationService: LocationService = frameworkTestKit.locationService
   val hostname: String                 = Networks().hostname
   val keycloakPort                     = 8081
   val $name;format="space,camel"$AppPort                    = 8085
