@@ -42,6 +42,10 @@ The project has following structure:
 │   ├── assets
 │   ├── components
 │   ├── config
+│   ├── contexts
+│   ├── hooks
+│   ├── models
+│   ├── routes
 │   ├── utils
 ├── test
 ├── types
