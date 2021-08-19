@@ -1,4 +1,4 @@
-lazy val `backend` = project
+lazy val `$name$-backend` = project
   .in(file("."))
   .aggregate(`ignore`)
   .settings(
@@ -8,7 +8,7 @@ lazy val `backend` = project
         version := "$version$"
       )
     ),
-    name := "backend",
+    name := "$name$-backend",
     fork := true,
     resolvers += "jitpack" at "https://jitpack.io",
     libraryDependencies ++= Seq(

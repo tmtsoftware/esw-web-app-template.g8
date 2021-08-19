@@ -1,5 +1,5 @@
 {
-  "name": "$name$",
+  "name": "$name$-frontend",
   "author": "$author_name$",
   "version": "$version$",
   "license": "Apache License, Version 2.0",

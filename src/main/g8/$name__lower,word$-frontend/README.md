@@ -1,4 +1,4 @@
-# $name$
+# $name$-frontend
 
 This project is a sample React web application.
 
