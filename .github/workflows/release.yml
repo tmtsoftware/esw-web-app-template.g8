@@ -64,13 +64,13 @@ jobs:
           g8 tmtsoftware/esw-web-app-template.g8 --name=sample
 
       - name: Build - backend app
-        working-directory: ./sample/backend
+        working-directory: ./sample/sample-backend
         run: |
           sbtn clean 
           sbtn test
 
       - name: Build - frontend app
-        working-directory: ./sample/frontend
+        working-directory: ./sample/sample-frontend
         run: |
           npm install
           npm run build
