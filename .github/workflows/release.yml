@@ -30,6 +30,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - name: Checkout ESW repo
+        uses: actions/checkout@v2
+        with:
+          repository: tmtsoftware/esw
+
       - uses: coursier/setup-action@v1
         with:
           jvm: 11
@@ -58,6 +63,11 @@ jobs:
           key: ${{ runner.os }}-sbt-${{ hashFiles('project/build.properties') }}
           restore-keys: |
             ${{ runner.os }}-sbt-
+
+      - name: Publish Local checked out ESW repo
+        run: |
+          sbtn clean
+          sbtn publishLocal
 
       - name: create new project from esw-web-app-template.g8 template
         run: |
