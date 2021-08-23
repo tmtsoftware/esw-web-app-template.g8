@@ -1,4 +1,4 @@
-# $name$
+# $name$-backend
 
 This project implements a sample HTTP server-based application using
 TMT Executive Software ([ESW](https://github.com/tmtsoftware/esw)) APIs.

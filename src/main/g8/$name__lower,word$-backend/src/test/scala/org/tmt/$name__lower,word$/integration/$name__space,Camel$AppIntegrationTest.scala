@@ -27,12 +27,10 @@ import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, ExecutionContext}
 
 class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTestKit with AnyWordSpecLike with Matchers with HttpCodecs {
+  import frameworkTestKit._
+ 
+  override implicit val patienceConfig: PatienceConfig = PatienceConfig(10.seconds)
 
-  implicit val actorSystem: ActorSystem[SpawnProtocol.Command] = frameworkTestKit.actorSystem
-  implicit val ec: ExecutionContext                            = actorSystem.executionContext
-  override implicit val patienceConfig: PatienceConfig         = PatienceConfig(10.seconds)
-
-  val locationService: LocationService = frameworkTestKit.frameworkWiring.locationService
   val hostname: String                 = Networks().hostname
   val keycloakPort                     = 8081
   val $name;format="space,camel"$AppPort                    = 8085

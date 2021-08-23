@@ -3,4 +3,4 @@
 ## Sample snippet reference
 
 Scala
-: @@snip [HttpCodecs](../../../backend/src/main/scala/org/tmt/$name;format="lower,word"$/http/HttpCodecs.scala) { #for-docs-snippet }
+: @@snip [HttpCodecs](../../../$name;format="lower,word"$-backend/src/main/scala/org/tmt/$name;format="lower,word"$/http/HttpCodecs.scala) { #for-docs-snippet }
