@@ -9,7 +9,7 @@ ThisBuild / docsRepo := githubRepoUrl
 ThisBuild / docsParentDir := ""
 ThisBuild / gitCurrentRepo := githubRepoUrl
 
-ThisBuild / version := {
+version := {
   sys.props.get("prod.publish") match {
     case Some("true") => version.value
     case _            => "0.1.0-SNAPSHOT"
