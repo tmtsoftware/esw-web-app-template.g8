@@ -10,7 +10,7 @@ Steps to release:
 6. Commit and push changes to `dev` branch
 7. Make sure `dev` workflow is green in actions tab in github repo
 8. Rebase dev branch with master branch
-9. Merge dev branch to master branch
+9. Merge dev branch to master branch using PR
 10. Make sure workflow is green in actions tab in github repo for `master` branch
 11. Run ./release.sh `VERSION` script by providing version number argument
     **Note:** `PROD=true` environment variable needs to be set before running `release.sh`
