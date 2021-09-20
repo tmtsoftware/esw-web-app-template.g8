@@ -16,3 +16,5 @@ Steps to release:
     **Note:** `PROD=true` environment variable needs to be set before running `release.sh`
 12. After release is complete, change the `esw` version back to `0.1.0-SNAPSHOT` in `project/Libs.scala` in dev branch
 13. Tagging esw-web-app-template.g8 will trigger `release` workflow in github actions tab. Make sure that `release` workflow is green
+
+After release, follow `RELEASING.md` of `esw-web-app-example`
