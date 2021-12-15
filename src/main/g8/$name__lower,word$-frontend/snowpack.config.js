@@ -1,5 +1,8 @@
 import { AppConfig } from './src/config/AppConfig.js'
 export default {
+  devOptions: {
+    port: 9000
+  },
   buildOptions: {
     clean: true,
     sourceMaps: false,
