@@ -9,12 +9,7 @@ ThisBuild / docsRepo := githubRepoUrl
 ThisBuild / docsParentDir := ""
 ThisBuild / gitCurrentRepo := githubRepoUrl
 
-version := {
-  sys.props.get("prod.publish") match {
-    case Some("true") => version.value
-    case _            => "0.1.0-SNAPSHOT"
-  }
-}
+version := "0.0.1"
 
 lazy val openSite =
   Def.setting {
