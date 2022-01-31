@@ -4,7 +4,7 @@ lazy val `$name$-backend` = project
   .settings(
     inThisBuild(
       List(
-        scalaVersion := "2.13.6",
+        scalaVersion := "2.13.8",
         version := "$version$"
       )
     ),

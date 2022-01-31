@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '15.x'
+          node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Cache ~/.npm
@@ -38,15 +38,8 @@ jobs:
       - uses: coursier/setup-action@v1
         with:
           jvm: 11
-          apps: sbt sbtn
+          apps: sbt sbtn giter8
       - uses: coursier/cache-action@v5
-
-      - name: Install giter8
-        run: |
-          cs install giter8
-          sudo mv /home/runner/cs/bin/g8 /usr/local/bin
-          cd /usr/local/bin
-          chmod +x g8
 
       - name: Cache ~/.cache
         uses: actions/cache@v1
