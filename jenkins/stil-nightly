@@ -1,0 +1,80 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+
+    options {
+        timeout(time: 2, unit: 'HOURS')
+        timestamps()
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                sh "git checkout $ESW_VERSION"
+                sh "git pull origin $ESW_VERSION"
+            }
+        }
+
+        stage('Publish Local') {
+            steps {
+                sh "sbt clean publishLocal"
+            }
+        }
+
+        stage('Giter8 Compile') {
+            steps {
+                sh "cd /tmp && rm -rf sample && g8 tmtsoftware/esw-web-app-template.g8 --name=sample --branch $VERSION"
+            }
+        }
+        
+        stage('Build backend app') {
+            steps {
+                sh "cd /tmp/sample/sample-backend && sbt clean test"
+            }
+        }
+        
+        stage('Build frontend app') {
+            steps {
+                sh "cd /tmp/sample/sample-frontend && npm install && npm run build && npm run test"
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                sendNotification(currentBuild.result)
+            }
+        }
+    }
+}
+
+def sendNotification(String buildStatus = 'STARTED') {
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    def colorCode = '#FF0000'
+    def subject = "${buildStatus}: Job '${env.JOB_NAME}' [${VERSION}] [${env.BUILD_NUMBER}]"
+    def summary = "${subject} (${env.BUILD_URL})"
+    def details = '${JELLY_SCRIPT,template="html"}'
+
+    // Override default values based on build status
+    if (buildStatus == 'STARTED') {
+        color = 'YELLOW'
+        colorCode = '#FFFF00'
+    } else if (buildStatus == 'SUCCESS') {
+        color = 'GREEN'
+        colorCode = '#00FF00'
+    } else {
+        color = 'RED'
+        colorCode = '#FF0000'
+        emailext(
+                subject: subject,
+                body: details,
+                to: "jweiss@tmt.org"
+        )
+    }
+
+    slackSend(channel: "#${SLACK_CH}", color: colorCode, message: summary)
+}
+

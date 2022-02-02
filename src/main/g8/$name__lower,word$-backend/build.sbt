@@ -4,7 +4,7 @@ lazy val `$name$-backend` = project
   .settings(
     inThisBuild(
       List(
-        scalaVersion := "2.13.6",
+        scalaVersion := "2.13.8",
         version := "$version$"
       )
     ),
@@ -16,7 +16,7 @@ lazy val `$name$-backend` = project
       Libs.`embedded-keycloak`        % Test,
       Libs.`scalatest`                % Test,
       Libs.`akka-http-testkit`        % Test,
-      Libs.`mockito-scala`            % Test,
+      Libs.`mockito`                  % Test,
       Libs.`akka-actor-testkit-typed` % Test,
       Libs.`akka-stream-testkit`      % Test
     ),

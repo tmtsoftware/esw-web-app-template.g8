@@ -2,7 +2,8 @@ package org.tmt.$name;format="lower,word"$.http
 
 import java.util.concurrent.CompletableFuture
 
-import org.mockito.MockitoSugar.{mock, verify, when}
+import org.mockito.Mockito.{verify, when}
+import org.scalatestplus.mockito.MockitoSugar.mock
 import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

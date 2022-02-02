@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { HttpConnection, HttpLocation, Prefix } from '@tmtsoftware/esw-ts'
+import type { HttpLocation } from '@tmtsoftware/esw-ts'
+import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
 import { anything, capture, deepEqual, verify, when } from 'ts-mockito'
@@ -54,7 +55,7 @@ describe('AdminGreeting', () => {
     )) as HTMLButtonElement
 
     await waitFor(() => userEvent.click(submitButton))
-    debugger
+
     verify(locationServiceMock.find(deepEqual(connection))).called()
     const [firstArg, secondArg] = capture(fetch).last()
     expect(firstArg).to.equal(httpLocation.uri + 'adminGreeting')
