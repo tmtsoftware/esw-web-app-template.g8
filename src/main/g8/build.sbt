@@ -3,7 +3,7 @@ import org.tmt.sbt.docs.DocKeys._
 
 lazy val githubRepoUrl = "https://github.com/your-username/your-project"
 
-ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / scalaVersion := "2.13.8"
 ThisBuild / organizationName := "TMT Org"
 ThisBuild / docsRepo := githubRepoUrl
 ThisBuild / docsParentDir := ""

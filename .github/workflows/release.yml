@@ -31,7 +31,7 @@ jobs:
         with:
           repository: tmtsoftware/esw
 
-      - uses: coursier/setup-action@v1
+      - uses: coursier/setup-action@v1.2.0-M2
         with:
           jvm: 11
           apps: sbt sbtn giter8
