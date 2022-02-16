@@ -1,7 +1,7 @@
 import sbt._
 
 object Libs {
-  val `esw-http-template-wiring` = "com.github.tmtsoftware.esw" %% "esw-http-template-wiring" % "0.4.0"
+  val `esw-http-template-wiring` = "com.github.tmtsoftware.esw" %% "esw-http-template-wiring" % "3b1cd4240f"
 
   //testing
   val `akka-http-testkit`        = "com.typesafe.akka"                        %% "akka-http-testkit"        % "10.2.7"
