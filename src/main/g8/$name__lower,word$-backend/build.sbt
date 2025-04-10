@@ -4,7 +4,7 @@ lazy val `$name$-backend` = project
   .settings(
     inThisBuild(
       List(
-        scalaVersion := "2.13.8",
+        scalaVersion := "3.6.4",
         version := "$version$"
       )
     ),
@@ -15,10 +15,10 @@ lazy val `$name$-backend` = project
       Libs.`esw-http-template-wiring` % "compile->compile;test->test",
       Libs.`embedded-keycloak`        % Test,
       Libs.`scalatest`                % Test,
-      Libs.`akka-http-testkit`        % Test,
+      Libs.`pekko-http-testkit`        % Test,
       Libs.`mockito`                  % Test,
-      Libs.`akka-actor-testkit-typed` % Test,
-      Libs.`akka-stream-testkit`      % Test
+      Libs.`pekko-actor-testkit-typed` % Test,
+      Libs.`pekko-stream-testkit`      % Test
     ),
     Test / fork := true
   )

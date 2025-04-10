@@ -15,15 +15,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: "22.14.0"
           registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g npm@11.2.0
 
       - name: Cache ~/.npm
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -31,18 +32,18 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Checkout ESW repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: tmtsoftware/esw
 
-      - uses: coursier/setup-action@v1.2.0-M2
+      - uses: coursier/setup-action@v1.2.0
         with:
-          jvm: temurin:1.17
-          apps: sbt sbtn giter8
-      - uses: coursier/cache-action@v6.3
+          jvm: temurin:1.21
+          apps: sbt giter8
+      - uses: coursier/cache-action@v6
 
       - name: Cache ~/.cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.cache
           key: ${{ runner.os }}-coursier-${{ hashFiles('project/Libs.scala') }}
@@ -50,7 +51,7 @@ jobs:
             ${{ runner.os }}-coursier-
 
       - name: Cache ~/.sbt
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.sbt
           key: ${{ runner.os }}-sbt-${{ hashFiles('project/build.properties') }}
@@ -59,8 +60,8 @@ jobs:
 
       - name: Publish Local checked out ESW repo
         run: |
-          sbtn clean 
-          sbtn publishLocal
+          sbt clean 
+          sbt publishLocal
 
       - name: Extract branch name (Trigger - PR)
         if: github.event_name == 'pull_request'
@@ -84,8 +85,8 @@ jobs:
       - name: Build - backend app
         working-directory: ./sample/sample-backend
         run: |
-          sbtn clean 
-          sbtn test
+          sbt clean 
+          sbt test
 
       - name: Build - frontend app
         working-directory: ./sample/sample-frontend

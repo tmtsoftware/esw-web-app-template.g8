@@ -11,15 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: "22.14.0"
           registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g npm@11.2.0
 
       - name: Cache ~/.npm
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -27,18 +28,18 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Checkout ESW repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: tmtsoftware/esw
 
-      - uses: coursier/setup-action@v1.2.0-M2
+      - uses: coursier/setup-action@v1.2.0
         with:
-          jvm: temurin:1.17
+          jvm: temurin:1.21
           apps: sbt sbtn giter8
       - uses: coursier/cache-action@v6.3
 
       - name: Cache ~/.cache
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.cache
           key: ${{ runner.os }}-coursier-${{ hashFiles('project/Libs.scala') }}
@@ -46,7 +47,7 @@ jobs:
             ${{ runner.os }}-coursier-
 
       - name: Cache ~/.sbt
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.sbt
           key: ${{ runner.os }}-sbt-${{ hashFiles('project/build.properties') }}
