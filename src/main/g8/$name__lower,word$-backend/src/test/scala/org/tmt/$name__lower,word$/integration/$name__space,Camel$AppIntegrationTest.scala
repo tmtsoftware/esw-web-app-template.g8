@@ -131,7 +131,7 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
     )
     val embeddedKeycloak = new EmbeddedKeycloak(keycloakData, Settings(port = port, printProcessLogs = false))
     val stopHandle       = Await.result(embeddedKeycloak.startServer(), 1.minute)
-    locationService.register(HttpRegistration(AASConnection.value, keycloakPort, "auth")).futureValue
+    locationService.register(HttpRegistration(AASConnection.value, keycloakPort, "")).futureValue
     stopHandle
   }
 
