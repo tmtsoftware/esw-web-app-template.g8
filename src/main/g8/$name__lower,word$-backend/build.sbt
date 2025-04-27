@@ -16,7 +16,9 @@ lazy val `$name$-backend` = project
       Libs.`embedded-keycloak`        % Test,
       Libs.`scalatest`                % Test,
       Libs.`pekko-http-testkit`        % Test,
-      Libs.`mockito`                  % Test,
+      Libs.`mockito` % Test,
+      Libs.`junit4-interface` % Test,
+      Libs.`testng-6-7` % Test,
       Libs.`pekko-actor-testkit-typed` % Test,
       Libs.`pekko-stream-testkit`      % Test
     ),
