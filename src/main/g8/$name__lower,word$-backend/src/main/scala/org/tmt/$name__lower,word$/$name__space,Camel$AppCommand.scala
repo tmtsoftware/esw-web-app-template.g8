@@ -7,10 +7,10 @@ sealed trait $name;format="space,Camel"$AppCommand
 object $name;format="space,Camel"$AppCommand {
 
   @CommandName("start")
-  final case class StartCommand(
-     @HelpMessage("port of the app")
-     @ExtraName("p")
-     port: Option[Int]
-   ) extends $name;format="space,Camel"$AppCommand
+  final case class StartOptions(
+      @HelpMessage("port of the app")
+      @ExtraName("p")
+      port: Option[Int]
+  ) extends $name;format="space,Camel"$AppCommand
 
 }

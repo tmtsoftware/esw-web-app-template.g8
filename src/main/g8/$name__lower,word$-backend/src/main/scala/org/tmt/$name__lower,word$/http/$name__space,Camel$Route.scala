@@ -1,7 +1,7 @@
 package org.tmt.$name;format="lower,word"$.http
 
-import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.Route
+import org.apache.pekko.http.scaladsl.server.Directives.*
+import org.apache.pekko.http.scaladsl.server.Route
 import csw.aas.http.AuthorizationPolicy.RealmRolePolicy
 import csw.aas.http.SecurityDirectives
 import org.tmt.$name;format="lower,word"$.service.$name;format="space,Camel"$Service

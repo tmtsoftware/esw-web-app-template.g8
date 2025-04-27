@@ -1,14 +1,14 @@
 package org.tmt.$name;format="lower,word"$.integration
 
-import akka.actor.typed.{ActorSystem, SpawnProtocol}
-import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.Uri.Path
-import akka.http.scaladsl.model._
-import akka.http.scaladsl.model.headers.{Authorization, OAuth2BearerToken}
-import akka.http.scaladsl.unmarshalling.Unmarshal
+import org.apache.pekko.actor.typed.{ActorSystem, SpawnProtocol}
+import org.apache.pekko.http.scaladsl.Http
+import org.apache.pekko.http.scaladsl.model.Uri.Path
+import org.apache.pekko.http.scaladsl.model.*
+import org.apache.pekko.http.scaladsl.model.headers.{Authorization, OAuth2BearerToken}
+import org.apache.pekko.http.scaladsl.unmarshalling.Unmarshal
 import csw.aas.core.commons.AASConnection
 import csw.location.api.models.Connection.HttpConnection
-import csw.location.api.models._
+import csw.location.api.models.*
 import csw.location.api.scaladsl.LocationService
 import csw.network.utils.Networks
 import csw.testkit.scaladsl.ScalaTestFrameworkTestKit
@@ -23,11 +23,12 @@ import org.tmt.$name;format="lower,word"$.impl.$name;format="space,Camel"$Wiring
 import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, GreetResponse, UserInfo}
 import org.tmt.$name;format="lower,word"$.http.HttpCodecs
 
+import scala.compiletime.uninitialized
 import scala.concurrent.duration.DurationInt
 import scala.concurrent.{Await, ExecutionContext}
 
 class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTestKit with AnyWordSpecLike with Matchers with HttpCodecs {
-  import frameworkTestKit._
+  import frameworkTestKit.*
  
   override implicit val patienceConfig: PatienceConfig = PatienceConfig(10.seconds)
 
@@ -37,9 +38,9 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
   val $name;format="space,camel"$Wiring                     = new $name;format="space,Camel"$Wiring(Some($name;format="space,camel"$AppPort))
   val appConnection: HttpConnection    = $name;format="space,camel"$Wiring.settings.httpConnection
 
-  var appLocation: HttpLocation  = _
-  var appUri: Uri                = _
-  var keycloakHandle: StopHandle = _
+  var appLocation: HttpLocation  = uninitialized
+  var appUri: Uri                = uninitialized
+  var keycloakHandle: StopHandle = uninitialized
 
   protected override def beforeAll(): Unit = {
     super.beforeAll()
@@ -120,8 +121,8 @@ class $name;format="space,Camel"$AppIntegrationTest extends ScalaTestFrameworkTe
         Realm(
           name = "TMT",
           users = Set(
-            ApplicationUser("admin", "password1", realmRoles = Set(eswUserRole, eswAdminRole)),
-            ApplicationUser("nonAdmin", "password2")
+            ApplicationUser("admin", "password1", "admin", "admin", "admin@tmt.org", realmRoles = Set(eswUserRole, eswAdminRole)),
+            ApplicationUser("nonAdmin", "password2", "nonAdmin", "nonAdmin", "nonAdmin@tmt.org")
           ),
           clients = Set(locationServerClient),
           realmRoles = Set(eswUserRole, eswAdminRole)
