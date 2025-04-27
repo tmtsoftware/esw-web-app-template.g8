@@ -13,7 +13,7 @@ import io.bullet.borer.compat.PekkoHttpCompat
 import msocket.security.models.AccessToken
 import org.mockito.Mockito.{reset, verify, when}
 import org.scalatest.BeforeAndAfterEach
-import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+import org.scalatest.matchers.should.Matchers.should
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar.mock
 import org.tmt.$name;format="lower,word"$.TestHelper
