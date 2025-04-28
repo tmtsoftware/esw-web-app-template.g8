@@ -1,7 +1,6 @@
 import { AuthContextProvider, LocationService, loadGlobalConfig } from '@tmtsoftware/esw-ts'
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import 'antd/dist/antd.css'
 import { MenuBar } from './components/menu/MenuBar'
 import { AppConfig } from './config/AppConfig'
 import { LocationServiceProvider } from './contexts/LocationServiceContext'
@@ -13,7 +12,7 @@ const basename =
     ? `/${AppConfig.applicationName}`
     : ''
 
-export const App = (): JSX.Element => {
+export const App = (): React.JSX.Element => {
   const { data: initialised, error } = useQuery(() => loadGlobalConfig().then(() => true))
   const locationService = LocationService()
 

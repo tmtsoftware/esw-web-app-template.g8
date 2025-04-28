@@ -1,7 +1,6 @@
 import { setAppName } from '@tmtsoftware/esw-ts'
 import ReactDOM from 'react-dom/client'
 import React from 'react'
-import { render } from 'react-dom'
 import { App } from './App'
 import { AppConfig } from './config/AppConfig'
 import './index.css'
@@ -9,4 +8,4 @@ import './index.css'
 setAppName(AppConfig.applicationName)
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(<App />, document.getElementById('root'))
+root.render(<App />)

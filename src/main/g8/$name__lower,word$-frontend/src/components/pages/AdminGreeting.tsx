@@ -8,7 +8,7 @@ import { getBackendUrl } from '../../utils/resolveBackend'
 import { UserForm } from '../form/UserForm'
 import { displayMessage } from './Welcome'
 
-export const AdminGreeting = (): JSX.Element => {
+export const AdminGreeting = (): React.JSX.Element => {
   const { auth } = useAuth()
 
   const [greeting, setGreeting] = useState<string>()

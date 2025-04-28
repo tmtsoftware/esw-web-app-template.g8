@@ -4,7 +4,7 @@ import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { Prefix, HttpConnection } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
-import { anything, capture, deepEqual, verify, when } from 'ts-mockito'
+import { anything, capture, deepEqual, verify, when } from '@johanblumenberg/ts-mockito'
 import { Greeting } from '../../src/components/pages/Greeting'
 import {
   locationServiceMock,

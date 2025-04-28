@@ -6,12 +6,16 @@ import {Greeting} from '../components/pages/Greeting'
 import {Welcome} from '../components/pages/Welcome'
 import {ProtectedRoute} from './ProtectedRoute'
 
-export const Routes = (): JSX.Element => {
+export const Routes = (): React.JSX.Element => {
   return (
     <RouterRoutes>
       <Route path='/' element={<Welcome/>}/>
       <Route path='/greeting' element={<Greeting/>}/>
-      <ProtectedRoute path='/adminGreeting' element={<AdminGreeting/>}/>
+      <Route path='/adminGreeting' element={
+        <ProtectedRoute>
+          <AdminGreeting/>
+        </ProtectedRoute>
+      }/>
       <Route path='*' element={<NotFound/>}/>
     </RouterRoutes>
   )

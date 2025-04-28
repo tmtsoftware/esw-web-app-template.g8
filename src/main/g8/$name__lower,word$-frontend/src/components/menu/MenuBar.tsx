@@ -7,7 +7,7 @@ import { Login } from './Login'
 import { Logout } from './Logout'
 
 
-export const MenuBar = (): JSX.Element => {
+export const MenuBar = (): React.JSX.Element => {
   const { auth, login, logout } = useAuth()
   const isAuthenticated = auth?.isAuthenticated() ?? false
 

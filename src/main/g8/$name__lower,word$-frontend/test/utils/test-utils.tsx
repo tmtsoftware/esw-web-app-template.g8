@@ -4,7 +4,7 @@ import { AuthContext } from '@tmtsoftware/esw-ts'
 import type { Auth, TestUtils, LocationService } from '@tmtsoftware/esw-ts'
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { instance, mock } from 'ts-mockito'
+import { instance, mock } from '@johanblumenberg/ts-mockito'
 import { LocationServiceProvider } from '../../src/contexts/LocationServiceContext'
 
 class MockedFetch {
@@ -30,7 +30,7 @@ const getMockAuth = (loggedIn: boolean): Auth => {
     isAuthenticated: () => loggedInValue,
     logout: () => {
       loggedInValue = false
-      return Promise.resolve() as TestUtils.KeycloakPromise<void, void>
+      return Promise.resolve() as Promise<void>
     },
     token: () => 'token string',
     tokenParsed: () =>
@@ -40,10 +40,7 @@ const getMockAuth = (loggedIn: boolean): Auth => {
     realmAccess: () => [''] as unknown as TestUtils.KeycloakRoles,
     resourceAccess: () => [''] as unknown as TestUtils.KeycloakResourceAccess,
     loadUserProfile: () =>
-      Promise.resolve({}) as TestUtils.KeycloakPromise<
-        TestUtils.KeycloakProfile,
-        void
-      >
+      Promise.resolve({}) as Promise<TestUtils.KeycloakProfile>
   }
 }
 
