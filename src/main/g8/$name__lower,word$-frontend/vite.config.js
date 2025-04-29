@@ -8,8 +8,7 @@ const testDeps =
       '@testing-library/react',
       '@testing-library/user-event',
       'chai',
-      'ts-mockito',
-      '@testing-library/react-hooks/dom'
+      '@johanblumenberg/ts-mockito'
     ]
     : []
 export default defineConfig({

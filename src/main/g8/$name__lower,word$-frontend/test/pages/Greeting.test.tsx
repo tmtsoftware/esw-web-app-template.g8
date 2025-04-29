@@ -4,14 +4,20 @@ import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { Prefix, HttpConnection } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
-import { anything, capture, deepEqual, verify, when } from '@johanblumenberg/ts-mockito'
+import {
+  anything,
+  capture,
+  deepEqual,
+  verify,
+  when
+} from '@johanblumenberg/ts-mockito'
 import { Greeting } from '../../src/components/pages/Greeting'
 import {
   locationServiceMock,
   mockFetch,
   renderWithRouter
 } from '../utils/test-utils'
-
+import '@ant-design/v5-patch-for-react-19'
 
 describe('Greeting', () => {
   const connection = HttpConnection(Prefix.fromString('$prefix$'), 'Service')
@@ -48,14 +54,15 @@ describe('Greeting', () => {
       'LastName'
     )) as HTMLInputElement
 
-    userEvent.type(firstNameInput, firstName)
-    userEvent.type(lastNameInput, lastName)
+    const user = userEvent.setup()
+    await user.type(firstNameInput, firstName)
+    await user.type(lastNameInput, lastName)
 
     const submitButton = (await screen.findByRole(
       'Submit'
     )) as HTMLButtonElement
 
-    await waitFor(() => userEvent.click(submitButton))
+    await waitFor(() => user.click(submitButton))
 
     verify(locationServiceMock.find(deepEqual(connection))).called()
     const [firstArg, secondArg] = capture(fetch).last()

@@ -10,7 +10,8 @@
     "antd": "^5.24.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.2.0"
+    "react-router-dom": "^7.2.0",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3"
   },
   "scripts": {
     "start": "vite",
@@ -19,7 +20,7 @@
     "prebuild": "npm-run-all --parallel fix",
     "test": "web-test-runner 'test/**/*.test.{ts,tsx}'",
     "fix": "npm-run-all --parallel clean fix:eslint fix:prettier",
-    "fix:eslint": "eslint --fix --config .eslintrc.json './**/*.{ts,tsx}'",
+    "fix:eslint": "eslint --fix --config eslint.config.mjs './**/*.{ts,tsx}'",
     "fix:prettier": "prettier --write --config .prettierrc './**/*.{ts,tsx}' "
   },
   "browserslist": [
@@ -43,6 +44,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-testing-library": "^7.1.1",
+    "@eslint/compat": "^1.2.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.5.3",
     "vite": "^6.2.6",
