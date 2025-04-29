@@ -8,7 +8,7 @@ export const UserForm = ({
   onFinish
 }: {
   onFinish: (values: UserInfo) => Promise<void>
-}): JSX.Element => {
+}): React.JSX.Element => {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 }

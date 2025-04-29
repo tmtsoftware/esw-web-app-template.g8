@@ -4,13 +4,20 @@ import type { HttpLocation } from '@tmtsoftware/esw-ts'
 import { HttpConnection, Prefix } from '@tmtsoftware/esw-ts'
 import { expect } from 'chai'
 import React from 'react'
-import { anything, capture, deepEqual, verify, when } from 'ts-mockito'
+import {
+  anything,
+  capture,
+  deepEqual,
+  verify,
+  when
+} from '@johanblumenberg/ts-mockito'
 import { AdminGreeting } from '../../src/components/pages/AdminGreeting'
 import {
   locationServiceMock,
   mockFetch,
   renderWithRouter
 } from '../utils/test-utils'
+import '@ant-design/v5-patch-for-react-19'
 
 describe('AdminGreeting', () => {
   const connection = HttpConnection(Prefix.fromString('$prefix$'), 'Service')
@@ -35,7 +42,6 @@ describe('AdminGreeting', () => {
     const greeting = `Hello admin user: \${firstName} \${lastName}!!!`
     const response = new Response(JSON.stringify({ greeting }))
     const fetch = mockFetch()
-
     when(fetch(anything(), anything())).thenResolve(response)
 
     renderWithRouter(<AdminGreeting />)
@@ -47,14 +53,15 @@ describe('AdminGreeting', () => {
       'LastName'
     )) as HTMLInputElement
 
-    userEvent.type(firstNameInput, firstName)
-    userEvent.type(lastNameInput, lastName)
+    const user = userEvent.setup()
+    await user.type(firstNameInput, firstName)
+    await user.type(lastNameInput, lastName)
 
     const submitButton = (await screen.findByRole(
       'Submit'
     )) as HTMLButtonElement
 
-    await waitFor(() => userEvent.click(submitButton))
+    await waitFor(() => user.click(submitButton))
 
     verify(locationServiceMock.find(deepEqual(connection))).called()
     const [firstArg, secondArg] = capture(fetch).last()

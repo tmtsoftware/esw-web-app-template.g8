@@ -2,7 +2,7 @@ import { Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useUsername } from '../../hooks/useAuth'
 
-export const Welcome = (): JSX.Element => {
+export const Welcome = (): React.JSX.Element => {
   const [username, setUsername] = useState<string | undefined>(undefined)
   const user = useUsername()
 
@@ -13,6 +13,6 @@ export const Welcome = (): JSX.Element => {
   return <>{displayMessage(`Welcome \${username ? username : 'Guest'} !!!`)}</>
 }
 
-export const displayMessage = (messsage: string): JSX.Element => (
+export const displayMessage = (messsage: string): React.JSX.Element => (
   <Typography.Title level={3}>{messsage}</Typography.Title>
 )

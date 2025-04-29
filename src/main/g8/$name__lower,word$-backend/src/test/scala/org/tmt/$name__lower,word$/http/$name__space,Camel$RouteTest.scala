@@ -1,19 +1,19 @@
 package org.tmt.$name;format="lower,word"$.http
 
-import akka.http.scaladsl.server.Route
-import akka.http.scaladsl.server.directives.BasicDirectives
-import akka.http.scaladsl.testkit.ScalatestRouteTest
+import org.apache.pekko.http.scaladsl.server.Route
+import org.apache.pekko.http.scaladsl.server.directives.BasicDirectives
+import org.apache.pekko.http.scaladsl.testkit.ScalatestRouteTest
 import csw.aas.http.AuthorizationPolicy.RealmRolePolicy
 import csw.aas.http.SecurityDirectives
 import csw.location.api.models.ComponentType.Service
 import csw.location.api.models.Connection.HttpConnection
-import csw.location.api.models._
+import csw.location.api.models.*
 import csw.prefix.models.Prefix
-import io.bullet.borer.compat.AkkaHttpCompat
+import io.bullet.borer.compat.PekkoHttpCompat
 import msocket.security.models.AccessToken
 import org.mockito.Mockito.{reset, verify, when}
 import org.scalatest.BeforeAndAfterEach
-import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
+import org.scalatest.matchers.should.Matchers.should
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.mockito.MockitoSugar.mock
 import org.tmt.$name;format="lower,word"$.TestHelper
@@ -23,7 +23,7 @@ import org.tmt.$name;format="lower,word"$.core.models.{AdminGreetResponse, Greet
 import scala.concurrent.Future
 import scala.util.Random
 
-class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRouteTest with AkkaHttpCompat with BeforeAndAfterEach with HttpCodecs {
+class $name;format="space,Camel"$RouteTest extends AnyWordSpec with ScalatestRouteTest with PekkoHttpCompat with BeforeAndAfterEach with HttpCodecs {
 
   private val service1: $name;format="space,Camel"$Impl                   = mock[$name;format="space,Camel"$Impl]
   private val service2                               = mock[J$name;format="space,Camel"$ImplWrapper]

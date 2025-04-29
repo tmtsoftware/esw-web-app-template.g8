@@ -6,7 +6,7 @@ import { getBackendUrl } from '../../utils/resolveBackend'
 import { UserForm } from '../form/UserForm'
 import { displayMessage } from './Welcome'
 
-export const Greeting = (): JSX.Element => {
+export const Greeting = (): React.JSX.Element => {
   const [greeting, setGreeting] = useState<string>()
 
   const locationService = useLocationService()

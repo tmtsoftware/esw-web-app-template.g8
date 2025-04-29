@@ -1,8 +1,9 @@
-import vite from 'vite-web-test-runner-plugin'
+import { vitePlugin } from '@remcovaes/web-test-runner-vite-plugin';
+
 process.env.NODE_ENV = 'test'
 export default {
   plugins: [
-    vite(),
+    vitePlugin(),
   ],
   testRunnerHtml: (testFramework) => `
     <html>
