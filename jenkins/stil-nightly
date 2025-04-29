@@ -18,7 +18,7 @@ pipeline {
 
         stage('Publish Local') {
             steps {
-                sh "sbt clean publishLocal"
+                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && sbt clean publishLocal"
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
         
         stage('Build backend app') {
             steps {
-                sh "cd /tmp/sample/sample-backend && sbt clean test"
+                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && cd /tmp/sample/sample-backend && sbt clean test"
             }
         }
         
