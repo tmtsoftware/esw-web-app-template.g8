@@ -32,7 +32,7 @@ pipeline {
         
         stage('Build backend app') {
             steps {
-                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && cd /tmp/sample/sample-backend && sbt clean test"
+                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && cd /tmp/sample/sample-backend && sbt -Dsbt.log.noformat=true clean test"
             }
         }
         
