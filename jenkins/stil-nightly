@@ -18,7 +18,9 @@ pipeline {
 
         stage('Publish Local') {
             steps {
-                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && sbt clean publishLocal"
+                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && java -version"
+                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && sbt -Dsbt.log.noformat=true clean"
+                sh "eval \$(cs java --jvm temurin:1.21.0 --env) && sbt -Dsbt.log.noformat=true publishLocal"
             }
         }
 
