@@ -24,7 +24,6 @@ pipeline {
                 sh "which npm && npm --version"
                 sh "which google-chrome && google-chrome --version"
                 sh "which npx && npx --version"
-                sh "npm ci"
                 sh "npx browserslist"
             }
         }
