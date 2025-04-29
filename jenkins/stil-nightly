@@ -38,6 +38,8 @@ pipeline {
         
         stage('Build frontend app') {
             steps {
+                sh 'bash -c ". $HOME/.nvm/nvm.sh;  which node && node --version"'
+                sh 'bash -c ". $HOME/.nvm/nvm.sh;  which npm && npm --version"'
                 sh "cd /tmp/sample/sample-frontend && npm install && npm run build && npm run test"
             }
         }
