@@ -19,6 +19,7 @@
     "clean": "rm -rf dist && mkdir dist",
     "prebuild": "npm-run-all --parallel fix",
     "test": "web-test-runner 'test/**/*.test.{ts,tsx}'",
+    "test:jenkins": "npm run test -- --config wtr-jenkins.config.js",
     "fix": "npm-run-all --parallel clean fix:eslint fix:prettier",
     "fix:eslint": "eslint --fix --config eslint.config.mjs './**/*.{ts,tsx}'",
     "fix:prettier": "prettier --write --config .prettierrc './**/*.{ts,tsx}' "
