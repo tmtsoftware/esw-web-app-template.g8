@@ -42,11 +42,8 @@ can be set to the primary machine
 interface name. For example, `en0`.  See the CSW documentation on [Network Topology](http://tmtsoftware.github.io/csw/deployment/network-topology.html) for more information.
 
 To start the app, run:
-`sbt "run start"`
-This will start the app with default port 8084. 
-
-If you want to start the app at custom port,
-run `sbt "run start -p <port number>`
+`sbt "run start --port 8084"`
+This will start the app on port 8084. 
 
 You can verify whether the application has started successfully by using the endpoint in `apptest.http` (e.g. using `curl` or a tool like [postman](https://www.postman.com/)).
 

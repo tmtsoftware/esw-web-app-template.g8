@@ -1,10 +1,7 @@
 import { Menu } from 'antd'
-import type { MenuProps } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { Login } from './Login'
-import { Logout } from './Logout'
 
 export const MenuBar = (): React.JSX.Element => {
   const { auth, login, logout } = useAuth()
