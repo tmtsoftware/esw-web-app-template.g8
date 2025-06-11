@@ -1,6 +1,6 @@
 # This is a Giter8 template for a TMT app which creates a sample frontend and backend project
 
-NOTE : This template can be used with a step by step [tutorial](https://tmtsoftware.github.io/esw-web-app-example/0.1.0-SNAPSHOT/index.html) to reach final [example](https://github.com/tmtsoftware/esw-web-app-example) state.
+NOTE : This template can be used with a step by step [tutorial](https://tmtsoftware.github.io/esw-web-app-example/index.html) to reach final [example](https://github.com/tmtsoftware/esw-web-app-example) state.
 
 The created backend project contains a sample application which includes the following :
 
